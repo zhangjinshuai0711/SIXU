@@ -4,20 +4,24 @@ import { existsSync, mkdirSync, openSync, readFileSync, writeFileSync, chmodSync
 import { fileURLToPath } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 import { createServer } from "node:net";
+import { checkConnection, processAlive as alive } from "./connectivity.mjs";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 const runtime = `${root}.runtime/`;
 const statePath = `${runtime}connection.json`;
 mkdirSync(runtime, { recursive: true, mode: 0o700 });
-function alive(pid) { try { process.kill(pid, 0); return true; } catch { return false; } }
 const old = existsSync(statePath) ? JSON.parse(readFileSync(statePath, "utf8")) : null;
 if (process.argv[2] === "stop") {
   for (const pid of [old?.tunnel_pid, old?.server_pid]) if (pid && alive(pid)) process.kill(pid, "SIGTERM");
   console.log("Probe services stopped.");
 } else if (process.argv[2] === "status") {
   console.log(JSON.stringify(old ? {
-    ...old, server_running: alive(old.server_pid), tunnel_running: alive(old.tunnel_pid),
+    ...old, ...await checkConnection(old),
   } : { running: false }, null, 2));
+} else if (process.argv[2] === "doctor") {
+  const connection = await checkConnection(old);
+  console.log(JSON.stringify(connection, null, 2));
+  if (!connection.healthy) process.exitCode = 1;
 } else if (process.argv[2] === "restart") {
   if (!old || !alive(old.tunnel_pid)) throw new Error("An active tunnel is required to preserve the current address.");
   if (alive(old.server_pid)) process.kill(old.server_pid, "SIGTERM");
@@ -39,9 +43,17 @@ if (process.argv[2] === "stop") {
     await delay(150);
   }
   if (!healthy) throw new Error("Updated server did not become healthy; inspect .runtime/server.log.");
-  console.log(JSON.stringify({ restarted: true, address_preserved: true }, null, 2));
+  console.log(JSON.stringify({
+    restarted: true, address_preserved: true, ...await checkConnection(state),
+  }, null, 2));
 } else if (old && alive(old.server_pid) && alive(old.tunnel_pid)) {
-  console.log(JSON.stringify(old, null, 2));
+  const connection = await checkConnection(old);
+  if (!connection.healthy) {
+    console.error(JSON.stringify(connection, null, 2));
+    process.exitCode = 1;
+  } else {
+    console.log(JSON.stringify(old, null, 2));
+  }
 } else {
   if (old && [old.server_pid, old.tunnel_pid].some(alive)) {
     throw new Error("Partial previous run exists. Run npm run stop before restarting.");
@@ -101,7 +113,13 @@ if (process.argv[2] === "stop") {
     };
     writeFileSync(statePath, JSON.stringify(state, null, 2) + "\n", { mode: 0o600 });
     chmodSync(statePath, 0o600);
-    console.log(JSON.stringify(state, null, 2));
+    const connection = await checkConnection(state);
+    if (connection.healthy) {
+      console.log(JSON.stringify(state, null, 2));
+    } else {
+      console.error(JSON.stringify({ ...connection, connection_saved: true }, null, 2));
+      process.exitCode = 1;
+    }
   } catch (error) {
     for (const pid of [tunnel?.pid, server.pid]) if (pid && alive(pid)) process.kill(pid, "SIGTERM");
     throw error;

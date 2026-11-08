@@ -45,8 +45,7 @@ const instructions = {
   synthesize: "Submit kind=final with answer, all covered_constraint_indices, unresolved issues, and result if the task requests structured data. Include conclusions for EVERY planned subproblem exactly once: subproblem_id, disposition (confirmed/revised/unresolved), result, basis. For confirmed, copy the stored result exactly; for revised, give its replacement and reason, checking dependent conclusions too. Mark remaining review issues unresolved. Use these reconciled conclusions consistently in answer and result. These are model-reported checks, not semantic verification.",
 };
 
-export function createReasoning({ onEvent = () => {}, ttlMs = 2 * 60 * 60 * 1000 } = {}) {
-  const runs = new Map();
+export function createReasoning({ onEvent = () => {}, ttlMs = 2 * 60 * 60 * 1000, runs = new Map() } = {}) {
   function lookup(id) {
     const run = runs.get(id);
     if (!run || Date.now() - run.createdAt > ttlMs) throw new Error("Reasoning run missing or expired.");

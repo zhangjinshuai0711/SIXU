@@ -12,7 +12,7 @@ import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/
 
 test("MCP transport exposes adaptive workflow and recovers its state after a server restart", async t => {
   const dir = mkdtempSync(join(tmpdir(), "sixu-http-"));
-  for (const file of ["server.mjs", "reasoning.mjs", "reasoning-tools.mjs", "adaptive.mjs", "probe.mjs", "cases.mjs", "package.json"])
+  for (const file of ["server.mjs", "reasoning.mjs", "reasoning-tools.mjs", "adaptive.mjs", "adaptive-core.mjs", "probe.mjs", "cases.mjs", "package.json"])
     cpSync(new URL(file, import.meta.url), join(dir, file));
   symlinkSync(fileURLToPath(new URL("node_modules", import.meta.url)), join(dir, "node_modules"));
   const port = await new Promise((resolve, reject) => {

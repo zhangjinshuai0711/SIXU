@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { artifactSchema } from "./reasoning.mjs";
-import { adaptiveArtifactSchema, budgetSchema } from "./adaptive.mjs";
+import { adaptiveArtifactSchema, budgetSchema } from "./adaptive-core.mjs";
 
 const writes = { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: false };
 const response = value => ({ content: [{ type: "text", text: JSON.stringify(value) }] });
