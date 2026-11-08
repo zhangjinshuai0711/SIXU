@@ -3,7 +3,7 @@
 先完成 [安装与 ChatGPT 接入](INSTALL.md)。本教程中的“思序”指你自己创建并连接的应用。
 完整问题应放入 `task`，不是只写“请帮我思考”；工具靠它保存本轮任务目标。
 
-## 每个聊天启用一次
+## 线性流程：兼容原用法
 
 在已选择应用的聊天中发送以下约定，然后另发你的实际问题：
 
@@ -11,7 +11,7 @@
 本聊天启用思序，直到我说“关闭思序”。
 
 收到我的具体问题后，先调用 begin_reasoning：
-task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
+task 传入完整问题，strategy=linear，feedback=none，client_tag=instant-linear-v021。
 不要把这段启用说明本身作为任务。
 
 按工具要求完成规划、2–4 个子问题求解、审查、必要修复和最终综合。
@@ -30,6 +30,30 @@ task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
 新聊天通常需要重新选择应用并提供约定；如果要一次性使用，
 也可以把上面的要求与具体问题一起发送。
 
+## 自适应搜索：v0.2 推荐试用方式
+
+更新本地服务和 ChatGPT 工具定义后，在新聊天选择应用并发送：
+
+```text
+本聊天启用思序自适应搜索，直到我说关闭。
+收到具体问题后调用 begin_reasoning，task 填完整问题，strategy=adaptive_search，
+feedback=none。按返回的 next_action 和最新 stage_key 持续调用 advance_reasoning，
+直到 completed；不要把启用说明当作问题。遇到错误或宿主限制时如实说明。
+只用当前聊天模型与本应用，不调用其他模型或付费 API。
+最后给出答案、简要依据、未解决事项、验证局限和 run_id。
+```
+
+默认预算为 8 个已接受动作、3 个候选、2 次修复、连续 2 次无进展后结束。
+`budget` 可分别传 `max_steps`、`max_candidates`、`max_revisions`、
+`max_no_progress`；最终综合不占动作预算。被拒绝的提交不消耗动作预算。
+服务只检查结构和规则，模型报告的进展、错误、候选与证据不等于客观事实。
+同一个聊天内的分支并非独立采样，也不保证验证确实发生。
+达到预算后进入最终综合，并要求保留已记录但未解决的问题。
+
+自适应任务的 `reasoning_status` 在两小时有效期内可以跨服务重启恢复，
+但要求使用同一个本地运行目录；旧的线性任务重启后仍会丢失。
+不要把 `completed` 当作正确率提升的证据。
+
 简单问题可以发送“关闭思序，接下来直接回答”，并在宿主界面按需要取消选择应用。
 再次使用时重新给出启用约定。服务端不能强制控制宿主是否调用工具。
 
@@ -41,7 +65,7 @@ task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
 > 行动安排。每个人都应有发言机会，保留至少 10 分钟处理意外。
 > 请给出可执行的时间表，并检查总时长、发言机会和行动项是否落实。
 
-工作流会要求模型先整理约束、拆成 2–4 个子问题，
+线性工作流会要求模型先整理约束、拆成 2–4 个子问题，
 逐项提交结果，再审查与综合。子问题内容由模型根据任务确定，不是固定模板答案。
 工具内保存简短结论和依据，不要求输出模型的私有思维链。
 
@@ -50,11 +74,11 @@ task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
 
 ## 成功与未完成如何区分
 
-- `completed`：计划、子问题、审查和最终结论核对均按协议提交。
+- `completed`：所选流程已完成最终提交。线性流程检查阶段顺序；自适应流程检查动作及预算规则。
 - `stopped`：预算或固定题客观检查达到上限，应报告停止状态及尚未解决的内容。
 - `rejected`：当前提交未被接受，需按错误信息修正，尚未推进到下一阶段。
-- `unresolved` / `unresolved_subproblems` 非空：完成了流程，但仍有明确未解决事项。
-- 一般任务的 `verification` 明确标记语义正确性未独立验证。
+- 线性流程的 `unresolved` / `unresolved_subproblems` 或自适应流程的 `final.unresolved` 非空：仍有未解决事项。
+- 线性流程的 `verification` 和自适应流程的 `limitations` 均说明一般任务未独立验证。
 
 不要仅凭流畅的最终答案判断任务已经调用过插件。
 `run_id` 用于查询当前服务器的任务，不是模型身份或答案正确性的证明。
@@ -80,6 +104,9 @@ task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
   "client_tag": "benchmark-no-feedback"
 }
 ```
+
+以下阶段字段用于线性流程。自适应流程使用 `adaptive_step` / `adaptive_final`，
+按返回的 `action` 与工具参数定义填写。
 
 `advance_reasoning` 使用工具上次返回的 `run_id` 和最新 `stage_key`。
 `artifact.kind` 按阶段为 `plan`、`solve`、`review`、`final`；
@@ -109,7 +136,7 @@ task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
 ```
 
 任务完成后可取回答案、`canonical_findings`、未解决子问题和提交次数。
-查询仅在同一个仍保有内存状态的服务器上有效。
+线性任务查询仅在仍保有内存状态的服务器上有效；自适应任务见上文。
 
 ## 固定测试题
 
@@ -134,5 +161,6 @@ task 传入完整问题，feedback=none，client_tag=instant-practical-v03。
 仍受宿主的订阅与使用限制约束。
 
 任务、产物与结果写入本机 `.runtime/events.jsonl`。
-内存任务的两小时有效期不等于日志保存期限；日志没有自动清理机制。
+自适应状态另写入 `.runtime/adaptive/`。两小时有效期不等于磁盘保存期限；
+状态文件和日志均没有自动清理机制。
 当前版本适合自己运行、处理非敏感问题，不是多人生产服务。

@@ -7,6 +7,7 @@ import { z } from "zod";
 import { createProbe } from "./probe.mjs";
 import { createReasoning } from "./reasoning.mjs";
 import { registerReasoningTools } from "./reasoning-tools.mjs";
+import { createAdaptive } from "./adaptive.mjs";
 
 const runtime = fileURLToPath(new URL(".runtime/", import.meta.url));
 mkdirSync(runtime, { recursive: true, mode: 0o700 });
@@ -19,10 +20,11 @@ function audit(event) {
 }
 const probe = createProbe({ onEvent: audit });
 const reasoning = createReasoning({ onEvent: audit });
+const adaptive = createAdaptive({ directory: `${runtime}adaptive`, onEvent: audit });
 const reply = value => ({ content: [{ type: "text", text: JSON.stringify(value) }] });
 function makeMcp() {
-  const mcp = new McpServer({ name: "reasoning-harness-probe", version: "0.1.0" });
-  registerReasoningTools(mcp, reasoning);
+  const mcp = new McpServer({ name: "reasoning-harness-probe", version: "0.2.1" });
+  registerReasoningTools(mcp, reasoning, adaptive);
   mcp.registerTool("start", {
     description: "Start a two-phase scheduling experiment. Solve the returned problem, submit the answer, then solve the new constraint returned by submit. Continue until completed or a tool error blocks progress. No LLM API is called by this server.",
     inputSchema: { client_tag: z.string().max(80).optional() },
@@ -49,7 +51,7 @@ const http = createServer(async (req, res) => {
   const path = new URL(req.url, "http://localhost").pathname;
   if (path === "/health" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, service: "reasoning-harness-probe", version: "0.1.0" }));
+    res.end(JSON.stringify({ ok: true, service: "reasoning-harness-probe", version: "0.2.1" }));
     return;
   }
   if (path !== endpointPath) { res.writeHead(404).end(); return; }
