@@ -23,7 +23,7 @@ const reasoning = createReasoning({ onEvent: audit });
 const adaptive = createAdaptive({ directory: `${runtime}adaptive`, onEvent: audit });
 const reply = value => ({ content: [{ type: "text", text: JSON.stringify(value) }] });
 function makeMcp() {
-  const mcp = new McpServer({ name: "reasoning-harness-probe", version: "0.2.2" });
+  const mcp = new McpServer({ name: "reasoning-harness-probe", version: "0.3.0" });
   registerReasoningTools(mcp, reasoning, adaptive);
   mcp.registerTool("start", {
     description: "Start a two-phase scheduling experiment. Solve the returned problem, submit the answer, then solve the new constraint returned by submit. Continue until completed or a tool error blocks progress. No LLM API is called by this server.",
@@ -51,7 +51,7 @@ const http = createServer(async (req, res) => {
   const path = new URL(req.url, "http://localhost").pathname;
   if (path === "/health" && req.method === "GET") {
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, service: "reasoning-harness-probe", version: "0.2.2" }));
+    res.end(JSON.stringify({ ok: true, service: "reasoning-harness-probe", version: "0.3.0" }));
     return;
   }
   if (path !== endpointPath) { res.writeHead(404).end(); return; }

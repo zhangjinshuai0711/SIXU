@@ -3,7 +3,7 @@ import { createAdaptiveEngine } from "../adaptive-core.mjs";
 import { createReasoning } from "../reasoning.mjs";
 import { registerReasoningTools } from "../reasoning-tools.mjs";
 
-const VERSION = "0.2.2";
+const VERSION = "0.3.0";
 const TTL = 2 * 60 * 60 * 1000;
 const MAX_BYTES = 65536;
 const toolRegistry = new Map();
