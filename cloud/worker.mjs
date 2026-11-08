@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { createAdaptiveEngine } from "../adaptive-core.mjs";
 import { createReasoning } from "../reasoning.mjs";
-import { registerReasoningTools } from "../reasoning-tools.mjs";
+import { conversationInstructions, registerReasoningTools, resolveStrategy } from "../reasoning-tools.mjs";
 
-const VERSION = "0.3.0";
+const VERSION = "0.3.1";
 const TTL = 2 * 60 * 60 * 1000;
 const MAX_BYTES = 65536;
 const toolRegistry = new Map();
@@ -64,7 +64,7 @@ async function callTool(name, args, owner, db) {
       return failure("INVALID_ARGUMENTS", "Supply a nonempty task up to 12000 characters.");
     if (input.feedback === "objective" && !input.case_id)
       return failure("INVALID_ARGUMENTS", "Objective feedback is supported only for the fixed benchmark case.");
-    if (input.strategy === "adaptive_search") {
+    if (resolveStrategy(input) === "adaptive_search") {
       if (input.case_id) return failure("INVALID_ARGUMENTS", "Adaptive search requires task, not case_id.");
       output = adaptive.start(input);
     } else {
@@ -76,7 +76,7 @@ async function callTool(name, args, owner, db) {
     output = name === "reasoning_status" ? engine.status(input.run_id) : engine.submit(input);
   }
   if (name === "reasoning_status") return content(output);
-  const protocol = previous?.protocol ?? input.strategy;
+  const protocol = previous?.protocol ?? resolveStrategy(input);
   const run = (protocol === "adaptive_search" ? adaptiveRuns : linearRuns).get(output.run_id);
   const stateJson = JSON.stringify(run);
   if (new TextEncoder().encode(stateJson).length > 1024 * 1024)
@@ -148,10 +148,10 @@ export default {
     const id = rpc.id ?? null;
     let result;
     if (rpc.method === "server/discover")
-      result = { supportedVersions: ["2026-07-28"], capabilities: { tools: {} } };
+      result = { supportedVersions: ["2026-07-28"], capabilities: { tools: {} }, instructions: conversationInstructions };
     else if (rpc.method === "initialize")
       result = { protocolVersion: "2025-03-26", capabilities: { tools: {} },
-        serverInfo: { name: "reasoning-harness-cloud", version: VERSION } };
+        serverInfo: { name: "reasoning-harness-cloud", version: VERSION }, instructions: conversationInstructions };
     else if (rpc.method === "ping") result = {};
     else if (rpc.method === "tools/list") result = { tools: [...toolRegistry.values()].map(t => t.definition) };
     else if (rpc.method === "tools/call") {

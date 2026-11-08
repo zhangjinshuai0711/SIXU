@@ -54,7 +54,10 @@ test("discovery exposes the original three tools and state operations require id
   assert.deepEqual((await rpc(DB, "server/discover")).value.supportedVersions, ["2026-07-28"]);
   const tools = (await rpc(DB, "tools/list")).value.tools;
   assert.deepEqual(tools.map(tool => tool.name), ["begin_reasoning", "advance_reasoning", "reasoning_status"]);
-  assert.equal(tools[0].inputSchema.properties.strategy.default, "linear");
+  assert.match(tools[0].description, /THIS chat/);
+  assert.match(tools[0].inputSchema.properties.strategy.description, /adaptive_search with task/);
+  assert.match((await rpc(DB, "initialize")).value.instructions, /关闭思序/);
+  assert.match((await rpc(DB, "server/discover")).value.instructions, /这次直接回答/);
   const anonymous = await call(DB, "begin_reasoning", { task: "Secret task." }, null);
   assert.equal(anonymous.result.isError, true);
   assert.equal(anonymous.value.code, "AUTH_REQUIRED");
@@ -97,9 +100,39 @@ test("adaptive repair workflow persists across independent worker instances with
   assert.equal((await call(DB, "reasoning_status", { run_id: run.run_id }, "owner-a", fresh)).value.final.answer, "2");
 });
 
+test("omitted strategy starts independent adaptive tasks while fixed cases retain linear compatibility", async t => {
+  const DB = database(t);
+  let first = (await call(DB, "begin_reasoning", { task: "Compute 1+1." })).value;
+  assert.equal(first.action, "EXPAND");
+  assert.equal(first.budget.max_steps, 8);
+  first = (await submit(DB, first, {
+    kind: "adaptive_step", action: "EXPAND", summary: "Addition gives 2.", progress: true,
+    rationale: "Ready to summarize.", candidate: { id: "C1", strategy: "addition", answer: "2" },
+    proposed_action: "FINALIZE",
+  })).value;
+  first = (await submit(DB, first, {
+    kind: "adaptive_final", answer: "2", selected_candidate_id: "C1", unresolved: [],
+  })).value;
+  assert.equal(first.status, "completed");
+  const second = (await call(DB, "begin_reasoning", { task: "Prior conclusion: 1+1=2. Now add 3." })).value;
+  assert.notEqual(second.run_id, first.run_id);
+  assert.equal(second.action, "EXPAND");
+  assert.equal(second.budget.used_steps, 0);
+  assert.equal(second.budget.max_steps, 8);
+  assert.equal((await call(DB, "reasoning_status", { run_id: first.run_id })).value.status, "completed");
+  const fixed = await call(DB, "begin_reasoning", { case_id: "sched-01" });
+  assert.notEqual(fixed.result.isError, true);
+  assert.equal(fixed.value.phase, "plan");
+  const protocols = DB.sqlite.prepare("SELECT protocol FROM reasoning_runs").all().map(row => row.protocol);
+  assert.deepEqual(protocols.sort(), ["adaptive_search", "adaptive_search", "linear"]);
+  assert.equal((await call(DB, "begin_reasoning", {
+    case_id: "sched-01", strategy: "adaptive_search",
+  })).value.code, "INVALID_ARGUMENTS");
+});
+
 test("linear workflow survives per-request reconstruction and preserves final reconciliation", async t => {
   const DB = database(t);
-  let run = (await call(DB, "begin_reasoning", { task: "Compute (1+1)*2." })).value;
+  let run = (await call(DB, "begin_reasoning", { task: "Compute (1+1)*2.", strategy: "linear" })).value;
   for (const artifact of [
     { kind: "plan", goal: "Calculate expression.", constraints: ["Use given arithmetic."], subproblems: [
       { id: "S1", question: "Compute 1+1.", depends_on: [] },
@@ -181,7 +214,7 @@ test("cloud run quota is enforced in the insertion and is scoped to one user", a
   for (let i = 0; i < 64; i++) insert.run("owner-a", `fixture-${i}`, Date.now() + 60000, Date.now());
   const rejected = await call(DB, "begin_reasoning", { task: "New task." });
   assert.equal(rejected.value.code, "RUN_LIMIT");
-  const other = await call(DB, "begin_reasoning", { task: "Other owner." }, "owner-b");
+  const other = await call(DB, "begin_reasoning", { task: "Other owner.", strategy: "linear" }, "owner-b");
   assert.equal(other.value.phase, "plan");
   assert.equal(DB.sqlite.prepare("SELECT COUNT(*) AS count FROM reasoning_runs WHERE owner_id = 'owner-a'").get().count, 64);
 });

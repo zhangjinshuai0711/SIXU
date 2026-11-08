@@ -1,6 +1,6 @@
 {
   "name": "reasoning-harness-mcp",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "思序 · Reasoning: a bounded multi-stage reasoning workflow for the current chat model, exposed through MCP.",
   "private": true,
   "type": "module",

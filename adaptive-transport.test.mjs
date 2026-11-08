@@ -55,9 +55,10 @@ test("MCP transport exposes adaptive workflow and recovers its state after a ser
   await start();
   let client = await connect();
   assert.ok((await client.listTools()).tools.find(tool => tool.name === "begin_reasoning"));
-  const linear = await call(client, "begin_reasoning", { task: "Legacy workflow." });
+  assert.match(client.getInstructions(), /THIS chat/);
+  const linear = await call(client, "begin_reasoning", { task: "Legacy workflow.", strategy: "linear" });
   assert.equal(linear.phase, "plan");
-  let run = await call(client, "begin_reasoning", { task: "Calculate 1+1.", strategy: "adaptive_search" });
+  let run = await call(client, "begin_reasoning", { task: "Calculate 1+1." });
   run = await call(client, "advance_reasoning", {
     run_id: run.run_id, stage_key: run.stage_key,
     artifact: { kind: "adaptive_step", action: "EXPAND", summary: "1+1=2.", progress: true,

@@ -15,7 +15,7 @@ try {
   await client.connect(new StreamableHTTPClientTransport(new URL(remote ? state.mcp_url : state.local_url)));
   const tools = await client.listTools();
   assert.ok(tools.tools.some(tool => tool.name === "advance_reasoning"));
-  let stage = await call("begin_reasoning", { task: "Compute (12+7)*2.", client_tag: "v03-transport-script" });
+  let stage = await call("begin_reasoning", { task: "Compute (12+7)*2.", strategy: "linear", client_tag: "v03-transport-script" });
   async function submit(artifact) {
     stage = await call("advance_reasoning", { run_id: stage.run_id, stage_key: stage.stage_key, artifact });
     return stage;
