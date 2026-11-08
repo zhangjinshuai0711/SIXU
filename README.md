@@ -18,6 +18,7 @@
 - [安装教程](docs/INSTALL.md)：安装依赖、启动服务、接入 ChatGPT。
 - [使用教程](docs/USAGE.md)：启用指令、完整示例、关闭方式和工具说明。
 - [实验记录与能力边界](docs/EVALUATION.md)：已验证什么、尚未证明什么。
+- [六题对照实验](benchmarks/pilot-v02/README.md)：发布后的直接回答、强化提示与自适应流程比较。
 - [版本记录](CHANGELOG.md)：各版本的改动与验证边界。
 - [名称、介绍和图标](branding/README.md)：创建自己的应用时可直接使用。
 
