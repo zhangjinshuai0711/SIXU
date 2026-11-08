@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">思序</title>
+  <desc id="desc">一条连接三个节点的折返路径，在最终节点形成勾选标记。</desc>
+  <rect width="512" height="512" rx="112" fill="#E8F1F1"/>
+  <path d="M144 132H304C344 132 368 160 368 196S344 260 304 260H208C168 260 144 288 144 324S168 388 208 388H352"
+        fill="none" stroke="#137C79" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="144" cy="132" r="42" fill="#137C79"/>
+  <circle cx="256" cy="260" r="34" fill="#EC8C72"/>
+  <circle cx="352" cy="388" r="56" fill="#173B42"/>
+  <path d="M329 389L345 405L376 373"
+        fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
