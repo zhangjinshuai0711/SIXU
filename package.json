@@ -1,6 +1,6 @@
 {
   "name": "reasoning-harness-mcp",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "思序 · Reasoning: a bounded multi-stage reasoning workflow for the current chat model, exposed through MCP.",
   "private": true,
   "type": "module",
@@ -12,7 +12,10 @@
     "url": "https://github.com/zhangjinshuai0711/reasoning-harness-mcp.git"
   },
   "scripts": {
-    "test": "node --test probe.test.mjs reasoning.test.mjs adaptive.test.mjs adaptive-transport.test.mjs connectivity.test.mjs cloud/worker.test.mjs",
+    "test": "node --test probe.test.mjs reasoning.test.mjs adaptive.test.mjs v04.test.mjs verification.test.mjs adaptive-transport.test.mjs connectivity.test.mjs cloud/worker.test.mjs benchmarks/pilot-v02/pilot.test.mjs",
+    "check:pilot": "node benchmarks/pilot-v02/pilot.mjs selfcheck",
+    "check:performance": "node performance-v04.mjs",
+    "check:bundle": "node --test cloud/bundle.test.mjs",
     "build:cloud": "node cloud/build.mjs",
     "start": "node launch.mjs",
     "restart": "node launch.mjs restart",

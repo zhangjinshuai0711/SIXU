@@ -18,6 +18,10 @@ const candidate = (answer = "15") => ({ id: "C1", strategy: "greedy", answer });
 const send = (controller, state, artifact) => controller.submit({
   run_id: state.run_id, stage_key: state.stage_key, artifact,
 });
+const full = (controller, state) => controller.status(state.run_id, { detail: "full" });
+const review = (candidateId, candidateVersion) => ({
+  candidate_id: candidateId, candidate_version: candidateVersion, finding: "Checked against the original task.",
+});
 
 test("reported error schedules repair, preserves replacement history, and resumes after restart", t => {
   const { directory, controller } = fixture(t);
@@ -33,12 +37,16 @@ test("reported error schedules repair, preserves replacement history, and resume
   state = send(resumed, state, step("REVISE", {
     candidate: candidate("14"), resolve_issue: 1, proposed_action: "FINALIZE",
   }));
-  assert.equal(state.action, "FINALIZE");
-  assert.equal(state.candidates[0].answer, "14");
+  assert.equal(state.action, "VERIFY");
+  state = full(resumed, state);
+  assert.equal(state.current_candidate.answer, "14");
   assert.equal(state.history.find(h => h.replaced_candidate).replaced_candidate.answer, "15");
-  state = send(resumed, state, { kind: "adaptive_final", answer: "14", selected_candidate_id: "C1", unresolved: [] });
+  state = send(resumed, state, step("VERIFY", {
+    review: review("C1", 2), resolve_issue: 1,
+    finalize: { selected_candidate_id: "C1", selected_candidate_version: 2 },
+  }));
   assert.equal(state.status, "completed");
-  assert.match(state.limitations, /not independently verified/);
+  assert.match(state.limitations, /not independent verification/);
   assert.equal(createAdaptive({ directory }).status(start.run_id).final.answer, "14");
 });
 
@@ -50,15 +58,18 @@ test("verification signals, unresolved errors, and budgets are not treated as pr
   }));
   assert.equal(state.action, "VERIFY");
   state = send(controller, state, step("VERIFY", {
-    evidence: { candidate_id: "C1", type: "external_report", description: "Model says a test passed." },
+    evidence: { candidate_id: "C1", candidate_version: 1, type: "external_report", description: "Model says a test passed." },
+    review: review("C1", 1),
     resolve_issue: 1, issue: { candidate_id: "C1", state: "error", description: "Another problem." },
   }));
-  assert.equal(state.evidence[0].verification, "unverified_report");
+  assert.equal(full(controller, state).evidence.find(entry => entry.type === "external_report").verification, "unverified_report");
   assert.equal(state.action, "FINALIZE");
-  assert.equal(send(controller, state, { kind: "adaptive_final", answer: "Unknown", unresolved: [] }).status, "rejected");
   assert.equal(send(controller, state, {
-    kind: "adaptive_final", answer: "Unknown", unresolved: ["Another problem."],
-  }).status, "completed");
+    kind: "adaptive_final", selected_candidate_id: "C1", selected_candidate_version: 1, answer: "Unknown",
+  }).status, "rejected");
+  assert.equal(send(controller, state, {
+    kind: "adaptive_final", selected_candidate_id: "C1", selected_candidate_version: 1, unresolved: [],
+  }).final.unresolved.includes("Another problem."), true);
 });
 
 test("branch and no-progress limits force bounded finalization", t => {
@@ -72,8 +83,11 @@ test("branch and no-progress limits force bounded finalization", t => {
   }));
   assert.equal(state.action, "CHALLENGE");
   state = send(controller, state, step("CHALLENGE", { progress: false, proposed_action: "EXPAND" }));
+  assert.equal(state.budget.consecutive_no_progress, 1);
+  state = send(controller, state, step("EXPAND", { progress: true, proposed_action: "CHALLENGE" }));
   assert.equal(state.action, "FINALIZE");
-  assert.match(state.action_reason, /no-progress/);
+  assert.equal(state.budget.consecutive_no_progress, 2);
+  assert.match(state.action_reason, /step_budget/);
 });
 
 test("a checked unresolved issue permits revision rather than repeated forced verification", t => {
@@ -90,6 +104,7 @@ test("a checked unresolved issue permits revision rather than repeated forced ve
   assert.equal(state.action, "VERIFY");
   state = send(controller, state, step("VERIFY", {
     affected_candidate_id: "C1", summary: "The agenda lacks an ownership checklist.",
+    review: review("C1", 1),
     proposed_action: "REVISE",
   }));
   assert.equal(state.action, "REVISE");
@@ -99,8 +114,13 @@ test("a checked unresolved issue permits revision rather than repeated forced ve
     candidate: candidate("Agenda with owner, deadline and acceptance checklist."),
     resolve_issue: 1, proposed_action: "FINALIZE",
   }));
-  assert.equal(state.issues[0].resolved, true);
+  assert.equal(state.issues[0].resolved, false);
   assert.equal(state.budget.revisions_used, 1);
+  assert.equal(state.action, "VERIFY");
+  state = send(resumed, state, step("VERIFY", {
+    review: review("C1", 2), resolve_issue: 1, proposed_action: "FINALIZE",
+  }));
+  assert.equal(full(resumed, state).issues[0].resolved, true);
   assert.equal(state.action, "FINALIZE");
 });
 
@@ -112,16 +132,20 @@ test("new issues require a fresh check and checks of another candidate do not co
   }));
   state = send(controller, state, step("BRANCH", {
     candidate: { id: "C2", strategy: "alternative", answer: "Another plan." },
+    affected_candidate_id: "C1",
     issue: { candidate_id: "C1", state: "testable", description: "Check first plan." },
   }));
-  state = send(controller, state, step("VERIFY", { affected_candidate_id: "C2", proposed_action: "REVISE" }));
-  assert.equal(state.action, "VERIFY");
-  state = send(controller, state, step("VERIFY", {
-    affected_candidate_id: "C1", resolve_issue: 1,
+  state = send(controller, state, step("VERIFY", { affected_candidate_id: "C2", proposed_action: "CHALLENGE" }));
+  assert.equal(state.action, "CHALLENGE");
+  assert.equal(state.issues.find(issue => issue.candidate_id === "C1").resolved, false);
+  state = send(controller, state, step("CHALLENGE", {
+    affected_candidate_id: "C1", review: review("C1", 1), resolve_issue: 1,
     issue: { candidate_id: "C1", state: "testable", description: "A newly discovered issue." },
     proposed_action: "REVISE",
   }));
   assert.equal(state.action, "VERIFY");
-  state = send(controller, state, step("VERIFY", { affected_candidate_id: "C1", proposed_action: "REVISE" }));
+  state = send(controller, state, step("VERIFY", {
+    affected_candidate_id: "C1", review: review("C1", 1), resolve_issue: 2, proposed_action: "REVISE",
+  }));
   assert.equal(state.action, "REVISE");
 });

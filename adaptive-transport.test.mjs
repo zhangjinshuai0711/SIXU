@@ -12,7 +12,7 @@ import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/
 
 test("MCP transport exposes adaptive workflow and recovers its state after a server restart", async t => {
   const dir = mkdtempSync(join(tmpdir(), "sixu-http-"));
-  for (const file of ["server.mjs", "reasoning.mjs", "reasoning-tools.mjs", "adaptive.mjs", "adaptive-core.mjs", "probe.mjs", "cases.mjs", "package.json"])
+  for (const file of ["server.mjs", "reasoning.mjs", "reasoning-tools.mjs", "adaptive.mjs", "adaptive-core.mjs", "verification.mjs", "probe.mjs", "cases.mjs", "package.json"])
     cpSync(new URL(file, import.meta.url), join(dir, file));
   symlinkSync(fileURLToPath(new URL("node_modules", import.meta.url)), join(dir, "node_modules"));
   const port = await new Promise((resolve, reject) => {
@@ -55,7 +55,7 @@ test("MCP transport exposes adaptive workflow and recovers its state after a ser
   await start();
   let client = await connect();
   assert.ok((await client.listTools()).tools.find(tool => tool.name === "begin_reasoning"));
-  assert.match(client.getInstructions(), /THIS chat/);
+  assert.match(client.getInstructions(), /previous invocation does NOT/);
   const linear = await call(client, "begin_reasoning", { task: "Legacy workflow.", strategy: "linear" });
   assert.equal(linear.phase, "plan");
   let run = await call(client, "begin_reasoning", { task: "Calculate 1+1." });
@@ -65,7 +65,7 @@ test("MCP transport exposes adaptive workflow and recovers its state after a ser
       rationale: "A candidate is available.", candidate: { id: "C1", strategy: "addition", answer: "2" },
       proposed_action: "FINALIZE" },
   });
-  assert.equal(run.action, "FINALIZE");
+  assert.equal(run.action, "CHALLENGE");
   await client.close();
   await stop();
   await start();
@@ -74,7 +74,9 @@ test("MCP transport exposes adaptive workflow and recovers its state after a ser
   assert.equal(restored.stage_key, run.stage_key);
   const done = await call(client, "advance_reasoning", {
     run_id: restored.run_id, stage_key: restored.stage_key,
-    artifact: { kind: "adaptive_final", answer: "2", selected_candidate_id: "C1", unresolved: [] },
+    artifact: { kind: "adaptive_step", action: "CHALLENGE", summary: "Checked current version.",
+      rationale: "Ready to finish.", review: { candidate_id: "C1", candidate_version: 1, finding: "1+1=2." },
+      finalize: { selected_candidate_id: "C1", selected_candidate_version: 1 } },
   });
   assert.equal(done.status, "completed");
   await client.close();

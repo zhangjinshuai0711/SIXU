@@ -1,9 +1,9 @@
 import { z } from "zod";
-import { createAdaptiveEngine } from "../adaptive-core.mjs";
+import { createAdaptiveEngine, AdaptiveInputError, SERVICE_VERSION } from "../adaptive-core.mjs";
 import { createReasoning } from "../reasoning.mjs";
 import { conversationInstructions, registerReasoningTools, resolveStrategy } from "../reasoning-tools.mjs";
 
-const VERSION = "0.3.1";
+const VERSION = SERVICE_VERSION;
 const TTL = 2 * 60 * 60 * 1000;
 const MAX_BYTES = 65536;
 const toolRegistry = new Map();
@@ -14,25 +14,32 @@ registerReasoningTools({
       schema,
       definition: {
         name, description: config.description, annotations: config.annotations,
-        inputSchema: z.toJSONSchema(schema, { target: "draft-7" }),
+        inputSchema: z.toJSONSchema(schema, { target: "draft-7", io: "input" }),
       },
     });
   },
 });
 
-const content = value => ({ content: [{ type: "text", text: JSON.stringify(value) }] });
+const content = value => ({
+  content: [{ type: "text", text: JSON.stringify(value) }],
+  ...(value.status === "rejected" ? { isError: true } : {}),
+});
 const failure = (code, message) => ({ ...content({ code, message }), isError: true });
 const json = (body, status = 200) => Response.json(body, {
   status, headers: { "Cache-Control": "no-store" },
 });
 
-async function callTool(name, args, owner, db) {
+async function callTool(name, args, owner, db, readOnly = false) {
   const tool = toolRegistry.get(name);
   if (!tool) return failure("UNKNOWN_TOOL", "Unknown tool.");
   const parsed = tool.schema.safeParse(args ?? {});
-  if (!parsed.success) return failure("INVALID_ARGUMENTS", parsed.error.issues.map(i => `${i.path.join(".")}: ${i.message}`).join("; "));
+  if (!parsed.success) {
+    const message = parsed.error.issues.map(i => `${i.path.join(".")}: ${i.message}`).join("; ");
+    return failure("INVALID_ARGUMENTS", `${message}${name === "begin_reasoning" ? " No run was created. Correct the arguments and retry begin_reasoning." : ""}`);
+  }
   if (!owner) return failure("AUTH_REQUIRED", "Authenticated Sites identity required.");
   if (!db) return failure("STORAGE_UNAVAILABLE", "Cloud state storage is not configured.");
+  if (readOnly && name !== "reasoning_status") return failure("MAINTENANCE_READ_ONLY", "Maintenance mode: writes paused; saved runs remain readable.");
   const input = parsed.data;
   const now = Date.now();
   let previous;
@@ -66,14 +73,20 @@ async function callTool(name, args, owner, db) {
       return failure("INVALID_ARGUMENTS", "Objective feedback is supported only for the fixed benchmark case.");
     if (resolveStrategy(input) === "adaptive_search") {
       if (input.case_id) return failure("INVALID_ARGUMENTS", "Adaptive search requires task, not case_id.");
-      output = adaptive.start(input);
+      try {
+        output = adaptive.start(input);
+      } catch (error) {
+        if (!(error instanceof AdaptiveInputError)) throw error;
+        return failure("INVALID_ARGUMENTS", `${error.message} No run was created. Correct the definitions and retry begin_reasoning. Arithmetic checks require structured left/right operands and a result path, not expression strings.`);
+      }
     } else {
-      if (input.budget) return failure("INVALID_ARGUMENTS", "Custom budget is supported only for adaptive_search.");
+      if (["budget", "depth", "auto_upgrade", "requirements", "checks"].some(name => input[name] !== undefined))
+        return failure("INVALID_ARGUMENTS", "Budget, depth, auto_upgrade, requirements and checks require adaptive_search.");
       output = linear.start(input);
     }
   } else {
     const engine = previous.protocol === "adaptive_search" ? adaptive : linear;
-    output = name === "reasoning_status" ? engine.status(input.run_id) : engine.submit(input);
+    output = name === "reasoning_status" ? engine.status(input.run_id, { detail: input.detail }) : engine.submit(input);
   }
   if (name === "reasoning_status") return content(output);
   const protocol = previous?.protocol ?? resolveStrategy(input);
@@ -157,7 +170,7 @@ export default {
     else if (rpc.method === "tools/call") {
       try {
         result = await callTool(rpc.params?.name, rpc.params?.arguments,
-          request.headers.get("oai-authenticated-user-id"), env.DB);
+          request.headers.get("oai-authenticated-user-id"), env.DB, env.SIXU_READ_ONLY === "true");
       } catch {
         result = failure("TOOL_FAILED", "The request could not be completed. Retrieve the saved run with reasoning_status before retrying. If a begin request lost its response, do not assume a run was created.");
       }
