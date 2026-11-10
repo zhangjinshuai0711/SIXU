@@ -62,9 +62,9 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 
 <div align="center">
 
-<img src="docs/images/instant-vs-sixu-demo.webp" alt="根据两张真实对话截图裁剪排版：普通 Instant 在同一回答中纠正了 B、D、E 的互斥错误并给出 A、D、E；Instant 加 Sixu Deep 也给出 A、D、E，服务状态为 completed、model_review_only，程序检查次数为零" width="100%" />
+<img src="docs/images/instant-vs-sixu-demo-hd.svg" alt="根据两张真实对话截图裁剪排版：普通 Instant 在同一回答中纠正了 B、D、E 的互斥错误并给出 A、D、E；Instant 加 Sixu Deep 也给出 A、D、E，服务状态为 completed、model_review_only，程序检查次数为零" width="100%" />
 
-<sub>真实截图节选，经裁剪、压缩并遮挡运行标识；不是连续录屏，也不是独立测评机构的实验报告。</sub>
+<sub>根据真实对话截图进行高清矢量重绘，便于放大查看；关键结果以公开对话为准，非严格控制实验。</sub>
 
 </div>
 
@@ -91,8 +91,6 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 **假设**某个任务的候选结果是 `497`，而题目要求计算 `18 × 24 + 75`。当客户端确实提交了对应的结构化检查，服务可标记检查失败；模型随后修订候选为 `507`，再接受针对新版本的检查。
 
 这是**机制教学示例，不是真实录屏或性能测试成绩**。真实过程并非固定六步：只有已声明并受支持的条件才会被程序检查，模型也可能遗漏需要声明的要求。
-
-> 🎥 **真实操作录屏尚未发布。** 录制所需的任务、镜头顺序、核对字段与隐私检查已经整理在 [真实演示录制指南](docs/RECORD_DEMO.md)。目前不放置假录屏或虚构的运行结果。
 
 ## 在 ChatGPT Instant 中使用
 
@@ -187,7 +185,7 @@ npm run stop
 
 **DON'T JUST ANSWER. EXPLORE. CHALLENGE. VERIFY.**
 
-[**Get Started**](docs/INSTALL.md) · [**English README**](README.en.md) · [**Brand assets**](branding/README.md) · [**Demo recording guide**](docs/RECORD_DEMO.md)
+[**Get Started**](docs/INSTALL.md) · [**English README**](README.en.md) · [**Brand assets**](branding/README.md)
 
 <sub>SIXU · 思序 · v0.4.0 · Public source / self-hosted · 本仓库目前未指定开源许可证</sub>
 

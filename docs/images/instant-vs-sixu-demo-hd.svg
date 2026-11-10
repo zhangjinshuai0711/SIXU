@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="820" viewBox="0 0 1440 820" role="img" aria-labelledby="title desc">
+<title id="title">ChatGPT Instant vs Instant plus Sixu — same five-project task, same optimum</title>
+<desc id="desc">High-resolution vector recreation based on user-supplied chat screenshots. Instant corrected its invalid B D E proposal within one response. Instant plus Sixu recorded candidate comparisons. Both concluded A D E with cost 10 and value 25. Sixu internal checks executed: zero.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#080e2b"/><stop offset=".64" stop-color="#151c47"/><stop offset="1" stop-color="#080c27"/></linearGradient>
+<linearGradient id="header" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#fcfcff"/><stop offset=".6" stop-color="#91e6ff"/><stop offset="1" stop-color="#c38bfa"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#44d7ef"/><stop offset="1" stop-color="#668aff"/></linearGradient>
+<linearGradient id="purple" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9579f8"/><stop offset="1" stop-color="#caa4f9"/></linearGradient>
+<pattern id="dot" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#324c87" opacity=".23"/></pattern>
+</defs>
+<rect x="0" y="0" width="1440" height="820" rx="0" fill="url(#bg)"/>
+<rect x="0" y="0" width="1440" height="820" rx="0" fill="url(#dot)"/>
+<text x="720" y="70" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="48" font-weight="850" fill="url(#header)" text-anchor="middle" letter-spacing="1">CHATGPT INSTANT  VS  INSTANT + SIXU</text>
+<text x="720" y="111" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="600" fill="#b9c9e8" text-anchor="middle" letter-spacing="1.6">ONE TASK  /  TWO REAL CHAT RESPONSES  /  SAME FINAL OPTIMUM</text>
+<rect x="24" y="147" width="682" height="526" rx="20" fill="#101f44" stroke="#4bbfe9" stroke-width="3"/>
+<rect x="734" y="147" width="682" height="526" rx="20" fill="#151d48" stroke="#9b77ee" stroke-width="3"/>
+<rect x="37" y="163" width="657" height="46" rx="14" fill="#1a345c"/>
+<rect x="746" y="163" width="657" height="46" rx="14" fill="#30255f"/>
+<text x="57" y="194" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="26" font-weight="800" fill="#73e8fa" >INSTANT  ·  DIRECT ANSWER</text>
+<text x="766" y="194" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="26" font-weight="800" fill="#d1b1ff" >INSTANT + SIXU  ·  DEEP</text>
+<rect x="37" y="219" width="657" height="441" rx="13" fill="#f8faff"/>
+<rect x="746" y="219" width="657" height="441" rx="13" fill="#f8faff"/>
+<text x="58" y="256" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="29" font-weight="800" fill="#111b32" >2. 候选方案比较</text>
+<text x="767" y="256" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="29" font-weight="800" fill="#111b32" >二、候选方案比较</text>
+<path d="M57 269L672 269" stroke="#dae3f2" stroke-width="1"/>
+<path d="M765 269L1382 269" stroke="#dae3f2" stroke-width="1"/>
+
+<text x="63" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >方案</text>
+<text x="169" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >项目组合</text>
+<text x="286" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >总成本</text>
+<text x="411" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >总价值</text>
+<text x="503" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >约束</text>
+<text x="769" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >候选</text>
+<text x="860" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >项目组合</text>
+<text x="1035" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >成本</text>
+<text x="1144" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >价值</text>
+<text x="1260" y="297" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="700" fill="#47556b" >结果</text>
+<path d="M57 307L675 307" stroke="#dae3f2" stroke-width="1"/>
+<path d="M765 307L1384 307" stroke="#dae3f2" stroke-width="1"/>
+<text x="63" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#24344b" >S1</text>
+<text x="169" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >B, D, E</text>
+<text x="286" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >9</text>
+<text x="411" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#25324b" >24</text>
+<text x="503" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" fill="#d94155" >✕ B、E 互斥</text>
+<path d="M58 348L673 348" stroke="#e3e8f2" stroke-width="1"/>
+<text x="63" y="373" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#24344b" >S2</text>
+<text x="169" y="373" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >A, B, D</text>
+<text x="286" y="373" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >9</text>
+<text x="411" y="373" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#25324b" >23</text>
+<text x="503" y="373" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" fill="#058b68" >✓ 满足</text>
+<path d="M58 385L673 385" stroke="#e3e8f2" stroke-width="1"/>
+<rect x="53" y="383" width="620" height="34" rx="6" fill="#d9f8f1"/>
+<text x="63" y="410" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="800" fill="#074b42" >S3</text>
+<text x="169" y="410" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="800" fill="#25324b" >A, D, E</text>
+<text x="286" y="410" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >10</text>
+<text x="411" y="410" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="800" fill="#04775b" >25</text>
+<text x="503" y="410" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" fill="#058b68" >✓ 满足</text>
+<path d="M58 422L673 422" stroke="#e3e8f2" stroke-width="1"/>
+<text x="63" y="447" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#24344b" >S4</text>
+<text x="169" y="447" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >B, D</text>
+<text x="286" y="447" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >5</text>
+<text x="411" y="447" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#25324b" >14</text>
+<text x="503" y="447" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" fill="#058b68" >✓ 满足</text>
+<path d="M58 459L673 459" stroke="#e3e8f2" stroke-width="1"/>
+<text x="63" y="484" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#24344b" >S5</text>
+<text x="169" y="484" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >A, C</text>
+<text x="286" y="484" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#25324b" >9</text>
+<text x="411" y="484" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#25324b" >21</text>
+<text x="503" y="484" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" fill="#058b68" >✓ 满足</text>
+<path d="M58 496L673 496" stroke="#e3e8f2" stroke-width="1"/>
+<rect x="762" y="309" width="619" height="35" rx="6" fill="#e6dcfe"/>
+<text x="769" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="800" fill="#3d2875" >C1</text>
+<text x="860" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="800" fill="#3d2875" >A, D, E</text>
+<text x="1035" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="800" fill="#3d2875" >10</text>
+<text x="1144" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="800" fill="#3d2875" >25</text>
+<text x="1260" y="336" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="800" fill="#3d2875" >最优</text>
+<path d="M765 348L1383 348" stroke="#e0e6f0" stroke-width="1"/>
+<text x="769" y="376" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >C2</text>
+<text x="860" y="376" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#26364d" >A, B, D</text>
+<text x="1035" y="376" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >9</text>
+<text x="1144" y="376" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >23</text>
+<text x="1260" y="376" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >次优</text>
+<path d="M765 388L1383 388" stroke="#e0e6f0" stroke-width="1"/>
+<text x="769" y="416" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >C3</text>
+<text x="860" y="416" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="21" font-weight="500" fill="#26364d" >A, C</text>
+<text x="1035" y="416" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >9</text>
+<text x="1144" y="416" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >21</text>
+<text x="1260" y="416" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="500" fill="#26364d" >可行</text>
+<path d="M765 428L1383 428" stroke="#e0e6f0" stroke-width="1"/>
+<text x="765" y="452" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="20" font-weight="600" fill="#3c4161" >C1 比 C2 多花费 1，但总价值增加 2。</text>
+<text x="58" y="544" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="700" fill="#164d67" >发现 B 与 E 互斥后，Instant 在同一次回答中改选 A + D + E。</text>
+<rect x="54" y="563" width="626" height="83" rx="12" fill="#e7ecf5"/>
+<text x="72" y="591" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="19" font-weight="650" fill="#314057" font-family='SFMono-Regular,Consolas,Menlo,monospace'>{&quot;selected&quot;: [&quot;A&quot;, &quot;D&quot;, &quot;E&quot;],</text>
+<text x="72" y="619" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="19" font-weight="650" fill="#314057" font-family='SFMono-Regular,Consolas,Menlo,monospace'> &quot;cost&quot;: 10, &quot;value&quot;: 25}</text>
+<text x="767" y="496" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="23" font-weight="800" fill="#33225c" >服务端流程记录</text>
+<path d="M766 509L1382 509" stroke="#dae3f2" stroke-width="1"/>
+<text x="768" y="535" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="500" fill="#5e6576" >status</text>
+<text x="1005" y="535" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="600" fill="#2f3c52" >completed</text>
+<path d="M766 541L1385 541" stroke="#e0e6f0" stroke-width="1"/>
+<text x="768" y="557" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="500" fill="#5e6576" >depth.actual</text>
+<text x="1005" y="557" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="600" fill="#2f3c52" >deep</text>
+<path d="M766 563L1385 563" stroke="#e0e6f0" stroke-width="1"/>
+<text x="768" y="579" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="500" fill="#5e6576" >selected</text>
+<text x="1005" y="579" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="600" fill="#2f3c52" >C1 · v1</text>
+<path d="M766 585L1385 585" stroke="#e0e6f0" stroke-width="1"/>
+<text x="768" y="601" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="500" fill="#5e6576" >steps / candidates</text>
+<text x="1005" y="601" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="600" fill="#2f3c52" >3 / 2</text>
+<path d="M766 607L1385 607" stroke="#e0e6f0" stroke-width="1"/>
+<text x="768" y="623" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="650" fill="#5e6576" >verification_status</text>
+<text x="1005" y="623" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="800" fill="#7453ab" >model_review_only</text>
+<path d="M766 629L1385 629" stroke="#e0e6f0" stroke-width="1"/>
+<text x="768" y="645" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="500" fill="#5e6576" >server checks</text>
+<text x="1005" y="645" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="17" font-weight="600" fill="#2f3c52" >0</text>
+<rect x="24" y="699" width="1392" height="104" rx="20" fill="#132852" stroke="#608ff3" stroke-width="2"/>
+<text x="51" y="748" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="40" font-weight="850" fill="#83f4f8" >FINAL:  A + D + E</text>
+<rect x="545" y="719" width="2" height="50" rx="0" fill="#6f96d2"/>
+<text x="579" y="748" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="40" font-weight="830" fill="#ffffff" >COST  10</text>
+<rect x="816" y="719" width="2" height="50" rx="0" fill="#6f96d2"/>
+<text x="855" y="748" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="40" font-weight="830" fill="#ffffff" >VALUE  25</text>
+<text x="53" y="781" font-family="Inter,Arial,'Noto Sans CJK SC','PingFang SC','Microsoft YaHei',sans-serif" font-size="18" font-weight="560" fill="#b1cde9" >Both correct · Instant self-corrected · SIXU: model review only, 0 server checks · No accuracy uplift claim</text>
+</svg>

@@ -63,9 +63,9 @@ According to [OpenAI's official usage-limits announcement](https://help.openai.c
 
 <div align="center">
 
-<img src="docs/images/instant-vs-sixu-demo.webp" alt="Real screenshot excerpts from Instant and Instant plus Sixu Deep. Both end with projects A, D, E, cost 10 and value 25. Sixu reports model_review_only with no executed internal checks." width="100%" />
+<img src="docs/images/instant-vs-sixu-demo-hd.svg" alt="Real screenshot excerpts from Instant and Instant plus Sixu Deep. Both end with projects A, D, E, cost 10 and value 25. Sixu reports model_review_only with no executed internal checks." width="100%" />
 
-<sub>Excerpts cropped and compressed from real chat screenshots; the run identifier is masked. These are not a video or a controlled benchmark.</sub>
+<sub>High-resolution vector recreation based on genuine chat screenshots. Read the linked conversations for the original evidence; this is not a controlled benchmark.</sub>
 
 </div>
 
@@ -89,7 +89,7 @@ According to [OpenAI's official usage-limits announcement](https://help.openai.c
 
 Consider the task `18 × 24 + 75`. An initial candidate `497` is incorrect. If the client declares the corresponding structured arithmetic check, the service can reject the candidate and track a revised value of `507` with a new candidate version.
 
-**This is a conceptual illustration, not a recording or benchmark result.** Checks only cover supported conditions actually submitted to the service. [Real-demo recording checklist](docs/RECORD_DEMO.md).
+**This is a conceptual illustration, not a recording or benchmark result.** Checks only cover supported conditions actually submitted to the service.
 
 ## Use Sixu with ChatGPT Instant
 
@@ -151,7 +151,7 @@ See [evaluation evidence](docs/EVALUATION.md), [18 first-response results](docs/
 
 ## Documentation
 
-[Local installation](docs/INSTALL.md) · [Cloud deployment](cloud/README.md) · [Usage](docs/USAGE.md) · [v0.4 protocol](docs/V0.4.md) · [Brand guide](branding/README.md) · [Recording guide](docs/RECORD_DEMO.md)
+[Local installation](docs/INSTALL.md) · [Cloud deployment](cloud/README.md) · [Usage](docs/USAGE.md) · [v0.4 protocol](docs/V0.4.md) · [Brand guide](branding/README.md)
 
 <div align="center">
 
