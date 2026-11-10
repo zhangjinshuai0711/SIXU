@@ -89,7 +89,7 @@ npm start
 
 想在网页端和桌面端使用同一持久实例？按 [**私有云部署教程**](cloud/README.md) 搭建自己的服务。云端方案包含私有网关、D1 状态持久化和用户隔离。
 
-> GitHub 开源的是**源码**，不是公共托管插件。作者现有实例仅供所有者访问；每位使用者需要部署并连接自己的实例。ChatGPT 是否支持自定义 MCP 应用取决于实际账号、工作区及客户端权限。
+> GitHub 公开的是**源码**，不是公共托管插件。作者现有实例仅供所有者访问；每位使用者需要部署并连接自己的实例。ChatGPT 是否支持自定义 MCP 应用取决于实际账号、工作区及客户端权限。
 
 ### 💬 接入后，一句话调用
 
@@ -175,6 +175,6 @@ node reasoning-smoke.mjs --remote
 
 [**Get Started**](docs/INSTALL.md) · [**Read the Docs**](docs/USAGE.md) · [**Explore the Source**](https://github.com/zhangjinshuai0711/reasoning-harness-mcp)
 
-<sub>SIXU · 思序 · v0.4.0 · Open source code, self-hosted service · 当前仓库未指定开源许可证</sub>
+<sub>SIXU · 思序 · v0.4.0 · Public source, self-hosted service · 当前仓库未指定开源许可证</sub>
 
 </div>
