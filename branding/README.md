@@ -1,33 +1,43 @@
-# SIXU · 思序 — 品牌与展示素材
+# SIXU · 思序品牌指南
 
-**官方视觉统一为：霓虹渐变 S 字母 + 分支路径节点。** 使用青色、蓝色、紫色和洋红色表达探索、比较、验证和修订。README 顶部、横幅和动态演示引用的是同一套 SVG 品牌元素。
+**品牌主标志：分支节点构成的渐变 S。** 使用青色、深蓝、紫色与洋红色，表达候选探索、比较、校验和修订。各页面的品牌母版统一采用 `sixu-symbol.svg`。
 
-## 当前推荐资源
+## 官方展示资产
 
-| 用途 | 文件 | 备注 |
+| 场景 | 资产 | 状态 |
 | --- | --- | --- |
-| 统一标志（矢量） | [sixu-symbol.svg](sixu-symbol.svg) | 官方优先版本，可缩放 |
-| GitHub 顶部横幅 | [sixu-hero.svg](sixu-hero.svg) | 已嵌入同一 S 标志 |
-| GitHub 动态 GIF 演示 | [sixu-workflow.gif](sixu-workflow.gif) | 六阶段循环演示；不是模型真实运行录屏 |
-| 备选 SVG 动画 | [sixu-workflow-animated.svg](sixu-workflow-animated.svg) | 适合支持 SVG 动画的场景 |
-| 项目首页 | [README](../README.md) | 首页已引用上述资源 |
-| 安装与连接 | [安装指南](../docs/INSTALL.md) | 每个使用者部署自己的实例 |
+| 品牌源 Logo | [sixu-symbol.svg](sixu-symbol.svg) | GitHub README 统一使用的主标志 |
+| GitHub 横幅 | [sixu-hero.svg](sixu-hero.svg) | 与主 Logo 相同的 S 路径 |
+| 社交分享封面候选 | [sixu-social-preview.svg](sixu-social-preview.svg) | 待导出 PNG 并在仓库 Settings 中设置 |
+| 错误→修订→校验案例 | [sixu-revision-story.svg](sixu-revision-story.svg) | 教学示意，非真实运行录屏 |
+| 原阶段 GIF | [sixu-workflow.gif](sixu-workflow.gif) | 旧版概念动画，留作兼容，不作为首页主演示 |
+| SVG 阶段动画 | [sixu-workflow-animated.svg](sixu-workflow-animated.svg) | 备用概念动画 |
 
-<div align="center">
-<img src="sixu-symbol.svg" alt="SIXU 官方 S 形分支路径标志" width="180" />
+<img src="sixu-symbol.svg" alt="SIXU gradient S logo" width="128" />
 
-<img src="sixu-hero.svg" alt="SIXU GitHub 封面" width="100%" />
-</div>
+<img src="sixu-hero.svg" alt="SIXU hero banner" width="100%" />
 
-## 原始兼容资源
+## 插件安装图标与兼容性
 
-原有 `icon-upload.png`、`icon-256.png`、`icon-1024.png`、`icon-32.png`、`icon-64.png` 和 `icon.svg` 暂时保留，避免旧应用安装和历史资源引用失效。**新 README 应优先引用 `sixu-symbol.svg`，不要把旧 PNG 当作新版标志。**
+仓库原有的 `icon-upload.png`、`icon-256.png`、`icon-1024.png`、`icon-64.png`、`icon-32.png` 和 `icon.svg` 属于**早期图标资产**，不会自动因为 README 更换 Logo 而更新 ChatGPT 里已经部署的应用图标。
 
-`presentation.json` 保存历史应用展示文本，仅供核对。Logo、横幅及动态图均为视觉展示资源，不改变 MCP 接口或实际模型推理等级。
+为避免破坏现有应用安装和历史引用，这批文件在统一导出并核对上传要求之前保留。**它们不应再被新宣传页面当作官方主 Logo。** 完成一次统一导出后，可以将各尺寸 PNG 更新为同一 S 母版，并在 ChatGPT 的应用配置中单独更新上传图标。
 
-## 使用说明
+如使用图像工具从 SVG 导出 PNG，应核对 32/64/256/1024 等目标尺寸和平台上传体积限制，不能只重命名 SVG 为 PNG。
 
-- 横幅与 S 标志采用同一矢量路径，可在 GitHub 中清晰缩放。
-- 动画展示的是 `INPUT → EXPAND → CHALLENGE → VERIFY → REVISE → FINALIZE` 的概念序列；真实运行由服务端 `next_action` 决定，未必每步都经过，也可能多次循环。
-- 程序检查只覆盖已声明且支持的结构化条件。`completed` 表示流程完成，不是普遍正确性保证。
-- 仓库公开了源码，目前未指定开源许可证；不要将“源代码可查看”误写成已经采用特定开源许可证。
+## 设计与陈述原则
+
+- 使用准确的产品事实：MCP 工作流、版本化候选、有限的已声明结构化检查、状态管理；不把 `deep` 宣称为模型原生 High。
+- 不能把 `completed` 当成全部结果“已证实”。
+- 解释示意图加“教学示意”标识；真实录屏须展示实际工具记录。
+- 动画、Banner、社交图使用同一主标志；避免重新设计与主 Logo 不同的 S。
+- 不使用“官方认证”“100% 正确率”“无限额度”等未经证实的营销词。
+- 代码已公开，但仓库当前未指定许可证；不要直接称为具有某种开源许可。
+
+## 元数据建议（需要在 GitHub 仓库设置中另行保存）
+
+- Description: `Turn one-shot LLM answers into stateful, reviewable reasoning workflows with MCP. Explore, challenge, verify, revise.`
+- Topics: `mcp`, `chatgpt`, `llm`, `reasoning`, `reasoning-harness`, `ai-agent`, `self-hosted`
+- Social preview: 将 [sixu-social-preview.svg](sixu-social-preview.svg) 导出为 PNG 后，在 GitHub 的 **Settings → General → Social preview** 设置。
+
+以上是建议文本；并不代表 GitHub 的 About、Topics 或 Social preview 已自动更改。
