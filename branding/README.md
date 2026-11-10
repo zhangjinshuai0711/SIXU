@@ -8,7 +8,8 @@
 | --- | --- | --- |
 | 统一标志（矢量） | [sixu-symbol.svg](sixu-symbol.svg) | 官方优先版本，可缩放 |
 | GitHub 顶部横幅 | [sixu-hero.svg](sixu-hero.svg) | 已嵌入同一 S 标志 |
-| 动态流程概念演示 | [sixu-workflow-animated.svg](sixu-workflow-animated.svg) | CSS 动画；流程示意，不代表真实运行录屏 |
+| GitHub 动态 GIF 演示 | [sixu-workflow.gif](sixu-workflow.gif) | 六阶段循环演示；不是模型真实运行录屏 |
+| 备选 SVG 动画 | [sixu-workflow-animated.svg](sixu-workflow-animated.svg) | 适合支持 SVG 动画的场景 |
 | 项目首页 | [README](../README.md) | 首页已引用上述资源 |
 | 安装与连接 | [安装指南](../docs/INSTALL.md) | 每个使用者部署自己的实例 |
 
