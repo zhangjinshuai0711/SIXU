@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="branding/icon-upload.png" alt="Sixu Reasoning" width="110" />
+<img src="branding/sixu-symbol.svg" alt="Sixu 思序 · S-shaped reasoning paths logo" width="115" />
+
+<img src="branding/sixu-hero.svg" alt="SIXU 思序 — Stop guessing, start reasoning. Explore, challenge, verify, revise." width="100%" />
 
 # SIXU · 思序
 
@@ -106,6 +108,17 @@ npm start
 [查看完整用法](docs/USAGE.md) · [查看 v0.4 接口](docs/V0.4.md)
 
 ## 🔥 看得见的推理过程，而不是一句“已认真思考”
+
+<div align="center">
+
+<img src="branding/sixu-workflow-animated.svg" alt="思序的六阶段动态流程示意：输入、候选、比较、检查、修订和完成" width="850" />
+
+<sub>动态流程示意，非真实运行录屏；只有已声明的结构化条件才会接受程序检查。</sub>
+
+</div>
+
+**与普通 Prompt 不同，Sixu 保存候选版本和服务端状态；流程完成并不等于正确性证明。**
+
 
 <div align="center">
 <img src="docs/images/adaptive-reasoning-architecture.png" alt="Sixu adaptive reasoning workflow" width="850" />
