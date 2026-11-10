@@ -1,0 +1,50 @@
+name: Render corrected demo PNG (one time)
+
+on:
+  push:
+    paths:
+      - ".github/workflows/render-sixu-comparison.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install SVG converter and CJK fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk
+          python -m pip install --quiet cairosvg
+      - name: Convert SVG to PNG and verify
+        run: |
+          python - <<'PY'
+          import cairosvg
+          from pathlib import Path
+          svg = Path('docs/images/instant-vs-sixu-corrected.svg')
+          png = Path('docs/images/instant-vs-sixu-corrected.png')
+          assert svg.exists(), 'missing corrected SVG'
+          cairosvg.svg2png(url=str(svg), write_to=str(png), output_width=1600, output_height=1040)
+          assert png.read_bytes().startswith(b'\x89PNG\r\n\x1a\n')
+          print('Converted PNG:', png, png.stat().st_size, 'bytes')
+          PY
+      - name: Point README at PNG and remove temporary SVG/workflow
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('README.md')
+          content = p.read_text()
+          old = 'docs/images/instant-vs-sixu-corrected.svg'
+          assert old in content, 'README image path changed unexpectedly'
+          p.write_text(content.replace(old, 'docs/images/instant-vs-sixu-corrected.png'))
+          PY
+          git rm docs/images/instant-vs-sixu-corrected.svg .github/workflows/render-sixu-comparison.yml
+          git add README.md docs/images/instant-vs-sixu-corrected.png
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "docs: convert corrected comparison image to PNG"
+          git push origin HEAD:main
