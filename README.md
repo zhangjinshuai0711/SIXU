@@ -183,7 +183,7 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 
 <div align="center">
 
-<img src="docs/images/instant-vs-sixu-corrected.svg" alt="真实对照：Instant 用三种情况分类讨论；SIXU 回答给出 32 种组合穷举论证，但实际程序检查为 0 次；最终均选择 A、D、E" width="100%" />
+<img src="docs/images/instant-vs-sixu-corrected.png" alt="真实对照：Instant 用三种情况分类讨论；SIXU 回答给出 32 种组合穷举论证，但实际程序检查为 0 次；最终均选择 A、D、E" width="100%" />
 
 <sub>修订后的高清矢量插图，依据截图与用户补充原文重新排版；不是原始聊天截图。区分模型文字中的穷举论证与服务端实际检查。</sub>
 
