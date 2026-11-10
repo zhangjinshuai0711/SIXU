@@ -2,9 +2,13 @@
 
 <img src="branding/sixu-hero.svg" alt="SIXU 思序 · Stop guessing. Start reasoning. 带状态的推理工作流" width="100%" />
 
-**让答案有路径，让修订有证据。**
+**⚡ ChatGPT Instant × SIXU — 为共享额度时代而设计的外部推理工作流。**
 
-把一次性回答变成可追踪的候选探索、检查与修订流程。
+### **12 月起，ChatGPT + Codex 共享额度；Instant Chat 不从共享额度扣除。**
+
+**让 Instant 不止于一次回答。** 利用 Sixu 的候选探索、审查、修订和状态管理，把需要高级推理额度的任务留给更适合它们的原生推理模式与 Codex。
+
+[**立即使用 Instant + Sixu**](#在-chatgpt-instant-中使用) · [**为什么 12 月值得关注**](#为什么-instant--sixu-值得关注) · [**查看工作流程图**](#思序如何为-instant-组织推理)
 
 [![Version](https://img.shields.io/badge/version-v0.4.0-715DF2)](CHANGELOG.md)
 [![Protocol](https://img.shields.io/badge/MCP-workflow-2B4375)](docs/V0.4.md)
@@ -23,6 +27,51 @@
 
 它**不是新的大模型**，也不会调整 ChatGPT 的原生推理档位。它的作用，是让复杂任务的处理过程更有结构、可以复查。
 
+## 为什么 Instant + Sixu 值得关注
+
+OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits)：**从 2026 年 12 月起，Plus、Pro、Business 的 ChatGPT 与 Codex 将共享按 Token 计量的使用额度，而 Instant Chat 不从这份共享额度中扣除。**
+
+| 原生高级推理 / Codex | **ChatGPT Instant + Sixu** |
+| --- | --- |
+| 需要按适用规则消耗共享额度 | **Instant Chat 按官方说明不扣共享额度** |
+| 模型可使用原生更高推理投入 | **不改变 Instant 的原生推理档位** |
+| 适合难度更高、价值更大的模型任务 | 尝试用外部多阶段流程处理**可检查、有明确约束**的问题 |
+| 不一定需要用户额外部署服务 | 需要可用的自定义 MCP 应用接入；Sixu 服务不另调用付费模型 API |
+
+**核心思路：先用 Instant + Sixu 处理适合工作流增强的问题；遇到真正需要更强原生推理的任务，再用 Medium、High 或 Codex。**
+
+> **额度说明：** “Instant Chat 不扣共享额度”是官方公布的额度计量规则，**不等于 Instant、外部工具和 MCP 调用完全无限制**。Sixu 是否可以在你的 ChatGPT Instant 环境使用，取决于客户端和账号的工具权限。插件也无法保证模型达到原生 High 水平或显著提升任意问题的准确率。实际用量以 ChatGPT **Settings → Usage** 为准。政策可能更新，以上依据 [OpenAI 官方说明](https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits)（2026-11-10 核对）。
+
+## 思序如何为 Instant 组织推理
+
+下图是 **GitHub 原生 Mermaid 流程图，默认展开显示**，不依赖外部图片加载：
+
+```mermaid
+flowchart TD
+    A["用户在 ChatGPT Instant 提出问题"] --> B["当前 Instant 模型产生候选"]
+    B --> C["Sixu MCP 保存 run_id / 阶段 / 版本"]
+    C --> D["EXPAND：建立候选"]
+    D --> E{"是否需要比较多个候选？"}
+    E -->|"需要"| F["BRANCH：生成其他候选"]
+    E -->|"不需要"| G["CHALLENGE / VERIFY：目标审查与有限程序检查"]
+    F --> G
+    G --> H{"需要修订？"}
+    H -->|"是"| I["REVISE：提交新版本；旧审查失效"]
+    I --> G
+    H -->|"满足完成条件"| J["FINALIZE：选定版本与未解决事项"]
+    J --> K["Instant 输出答案及真实 run_id"]
+    classDef instant fill:#14345c,stroke:#55c6eb,color:#ffffff
+    classDef sixu fill:#30245e,stroke:#ad90ff,color:#ffffff
+    classDef gate fill:#17483f,stroke:#69debd,color:#ffffff
+    class A,B,K instant
+    class C,D,F,G,I,J sixu
+    class E,H gate
+```
+
+**模型负责思考与生成，Sixu 负责强制执行有状态的工作流。** 深度模式会要求不同候选进行比较，检查失败可以进入修订；实际路线由 `next_action` 决定，流程不是固定六步。“已完成”仅表示协议完成，程序只检查实际声明且受支持的条件。
+
+[查看完整版架构图](docs/images/adaptive-reasoning-architecture.png) · [查看结构化校验与版本规则](docs/V0.4.md)
+
 ## 一个具体例子
 
 <div align="center">
@@ -34,6 +83,16 @@
 这是**机制教学示例，不是真实录屏或性能测试成绩**。真实过程并非固定六步：只有已声明并受支持的条件才会被程序检查，模型也可能遗漏需要声明的要求。
 
 > 🎥 **真实操作录屏尚未发布。** 录制所需的任务、镜头顺序、核对字段与隐私检查已经整理在 [真实演示录制指南](docs/RECORD_DEMO.md)。目前不放置假录屏或虚构的运行结果。
+
+## 在 ChatGPT Instant 中使用
+
+**使用路径：** 在 ChatGPT 中选择 **Instant** → 选择你已连接的 **Sixu / 思序** 自定义 MCP 应用 → 发送带 `@思序` 的问题 → 以真实工具结果的 `run_id` 确认任务已执行。
+
+```text
+@思序 深度：使用当前 Instant 分析这个问题，生成不同候选、对照并检查关键约束；必要时修订，最终报告实际 run_id 和验证状态。
+```
+
+这里的“深度”指 **Sixu 外部流程深度**，不切换 ChatGPT 模型为 High。若当前账号/客户端不允许 Instant 调用该 MCP 应用，请先确认权限，而不是把未成功调用当作已执行。
 
 ## 快速开始
 
@@ -69,7 +128,7 @@ npm start
 @思序 深度：对这道复杂排程题构建不同候选，比较并检查冲突。
 ```
 
-默认中度；每次希望调用时需显式选择该应用。以实际工具调用和 `run_id` 确认它已运行。**深度**指工作流预算与比较规则，不是原生 High 模型。
+默认中度；需要使用时请在本轮显式调用，凭实际工具记录与 `run_id` 确认运行。**深度**指外部工作流预算与比较规则，不是原生 High 模型。
 
 ## 核心能力
 
