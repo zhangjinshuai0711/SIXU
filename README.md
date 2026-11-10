@@ -15,7 +15,7 @@
 [![Hosting](https://img.shields.io/badge/deployment-self--hosted-2B8F88)](cloud/README.md)
 [![API](https://img.shields.io/badge/extra%20model%20API%20key-not%20required-8D5CD6)](#无需额外模型-api-key)
 
-**[快速开始](#快速开始)** · **[先看示例](#一个具体例子)** · **[安装教程](docs/INSTALL.md)** · **[English](README.en.md)**
+**[快速开始](#快速开始)** · **[真实对照](#真实对照instant-vs-sixu)** · **[安装教程](docs/INSTALL.md)** · **[English](README.en.md)**
 
 </div>
 
@@ -56,6 +56,32 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 
 [查看 v0.4.0 协议与校验](docs/V0.4.md) · [完整使用指南](docs/USAGE.md)
 
+## 真实对照：Instant vs Sixu
+
+**2026-11-10 · 同一道 5 项目预算优化题 · 两份真实 ChatGPT 对话**
+
+<div align="center">
+
+<img src="docs/images/instant-vs-sixu-demo.webp" alt="根据两张真实对话截图裁剪排版：普通 Instant 在同一回答中纠正了 B、D、E 的互斥错误并给出 A、D、E；Instant 加 Sixu Deep 也给出 A、D、E，服务状态为 completed、model_review_only，程序检查次数为零" width="100%" />
+
+<sub>真实截图节选，经裁剪、压缩并遮挡运行标识；不是连续录屏，也不是独立测评机构的实验报告。</sub>
+
+</div>
+
+| 本次对照 | **Instant 直接回答** | **Instant + Sixu Deep** |
+| --- | --- | --- |
+| 最终选择 | **A + D + E** | **A + D + E** |
+| 成本 / 价值 | **10 / 25** | **10 / 25** |
+| 过程特点 | 先提出违规的 `B + D + E`，**同一次回复内自行识别互斥错误并修正** | 展示候选对比、审查和服务端流程状态 |
+| 额外工作流 | 无 Sixu | `completed` / `deep` / 3 个步骤 |
+| Sixu 服务端程序检查 | 不适用 | **0 次**；`verification_status=model_review_only` |
+
+**题目条件：** A(成本4,价值9)、B(3,8)、C(5,12)、D(2,6)、E(4,10)；预算 ≤ 10；选 C 必须选 A；B 与 E 互斥。该题共有 32 个子集，独立枚举得到 13 个可行子集，**A + D + E（价值 25）是唯一全局最优解**。这一枚举是对题目的独立核对，**不是本次 Sixu 服务端实际运行的检查**。
+
+**这次案例说明了什么？** 普通 Instant 可以在单次回答内纠错；Sixu 可以留下结构化候选与流程记录。**两者最终都正确，本例没有证明 Sixu 比 Instant 更准确。** 此外，模型文字中的“已穷举”与服务端实际执行检查是两回事，本次不能宣传为程序已证明最优。
+
+**查看公开对话：** [记录 ①](https://chatgpt.com/share/6af2f8a7-204c-83ee-90e7-ec4f938d98f6) · [记录 ②](https://chatgpt.com/share/6af2f8d9-bf64-83ee-95bd-148e626523ea) · [实验记录与局限](docs/EVALUATION.md)
+
 ## 一个具体例子
 
 <div align="center">
@@ -85,8 +111,8 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 准备 Git、**Node.js 22+**、npm 和 [Cloudflare `cloudflared`](https://developers.cloudflare.com/tunnel/downloads/)。
 
 ```bash
-git clone https://github.com/zhangjinshuai0711/reasoning-harness-mcp.git
-cd reasoning-harness-mcp
+git clone https://github.com/zhangjinshuai0711/SIXU.git
+cd SIXU
 npm ci
 npm test
 npm start

@@ -14,7 +14,7 @@
 [![Protocol](https://img.shields.io/badge/MCP-workflow-2B4375)](docs/V0.4.md)
 [![Hosting](https://img.shields.io/badge/deployment-self--hosted-2B8F88)](cloud/README.md)
 
-**[Quick start](#quick-start)** · **[See the example](#a-concrete-example)** · **[Documentation](docs/INSTALL.md)** · **[中文说明](README.md)**
+**[Quick start](#quick-start)** · **[Real example](#real-world-comparison-instant-vs-sixu)** · **[Documentation](docs/INSTALL.md)** · **[中文说明](README.md)**
 
 </div>
 
@@ -57,6 +57,32 @@ According to [OpenAI's official usage-limits announcement](https://help.openai.c
 
 [v0.4.0 protocol and checks](docs/V0.4.md) · [Usage guide](docs/USAGE.md)
 
+## Real-world comparison: Instant vs Sixu
+
+**November 10, 2026 · Same five-project constrained selection task · Two actual ChatGPT conversations**
+
+<div align="center">
+
+<img src="docs/images/instant-vs-sixu-demo.webp" alt="Real screenshot excerpts from Instant and Instant plus Sixu Deep. Both end with projects A, D, E, cost 10 and value 25. Sixu reports model_review_only with no executed internal checks." width="100%" />
+
+<sub>Excerpts cropped and compressed from real chat screenshots; the run identifier is masked. These are not a video or a controlled benchmark.</sub>
+
+</div>
+
+| Observation | **Instant alone** | **Instant + Sixu Deep** |
+| --- | --- | --- |
+| Final selection | **A + D + E** | **A + D + E** |
+| Cost / value | **10 / 25** | **10 / 25** |
+| What happened | Initially proposed an invalid `B + D + E`, then **self-corrected within the same reply** | Compared candidates and recorded workflow state |
+| Workflow | No Sixu | `completed` / `deep` / 3 steps |
+| Sixu program checks | Not applicable | **0 executed** · `model_review_only` |
+
+**Task:** A(cost 4, value 9), B(3,8), C(5,12), D(2,6), E(4,10); budget ≤ 10; selecting C requires A; B and E are mutually exclusive. Independent exhaustive enumeration of 32 subsets gives 13 feasible subsets and confirms **A + D + E** as the unique optimum (value 25). **That enumeration was not an internal check performed by Sixu during this run.**
+
+**What this demonstrates:** Both final answers were correct. Sixu exposed a stateful candidate-review workflow; the direct Instant answer also caught its own constraint mistake. **One example does not establish an accuracy improvement.** A model claiming exhaustive verification is not equivalent to an executed server check.
+
+**Source conversations:** [Chat ①](https://chatgpt.com/share/6af2f8a7-204c-83ee-90e7-ec4f938d98f6) · [Chat ②](https://chatgpt.com/share/6af2f8d9-bf64-83ee-95bd-148e626523ea) · [Evidence and limits](docs/EVALUATION.md)
+
 ## A concrete example
 
 <img src="branding/sixu-revision-story.svg" alt="Illustrative arithmetic example: an incorrect 497 candidate is revised to 507 and checked" width="100%" />
@@ -80,8 +106,8 @@ In a ChatGPT client where custom MCP apps are available: **select Instant** → 
 **Requirements:** Git, Node.js 22+, npm and Cloudflare [`cloudflared`](https://developers.cloudflare.com/tunnel/downloads/). The local installation workflow has been tested on macOS.
 
 ```bash
-git clone https://github.com/zhangjinshuai0711/reasoning-harness-mcp.git
-cd reasoning-harness-mcp
+git clone https://github.com/zhangjinshuai0711/SIXU.git
+cd SIXU
 npm ci
 npm test
 npm start
