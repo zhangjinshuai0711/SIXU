@@ -47,7 +47,7 @@ According to [OpenAI's official usage-limits announcement](https://help.openai.c
 
 <div align="center">
 
-<img src="branding/sixu-instant-flow.svg" alt="Animated ChatGPT Instant and Sixu workflow: INPUT, EXPAND, BRANCH, CHALLENGE, VERIFY, REVISE, FINALIZE, including an optional revision loop" width="100%" />
+<img src="branding/sixu-instant-flow.gif" alt="Animated ChatGPT Instant and Sixu workflow: INPUT, EXPAND, BRANCH, CHALLENGE, VERIFY, REVISE, FINALIZE, including an optional revision loop" width="100%" />
 
 <sub>Animated conceptual diagram · Actual stages depend on the task and server next_action; only declared, supported conditions can be programmatically checked.</sub>
 
