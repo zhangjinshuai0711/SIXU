@@ -71,7 +71,15 @@ flowchart TD
 
 **The chat model generates; Sixu tracks and constrains the workflow.** This is not a fixed six-step chain and does not prove arbitrary conclusions correct. Only submitted, supported structured conditions can be checked programmatically.
 
-[Full architecture image](docs/images/adaptive-reasoning-architecture.png) · [v0.4 technical details](docs/V0.4.md)
+<div align="center">
+
+<img src="docs/images/adaptive-reasoning-architecture.png" alt="Sixu adaptive reasoning architecture, visible static fallback" width="850" />
+
+<sub>Static diagram fallback if Mermaid does not render in your client.</sub>
+
+</div>
+
+[Open full-size architecture image](docs/images/adaptive-reasoning-architecture.png) · [v0.4 technical details](docs/V0.4.md)
 
 ## A concrete example
 
