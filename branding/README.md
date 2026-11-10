@@ -19,7 +19,7 @@
 
 ## 插件安装图标与兼容性
 
-仓库原有的 `icon-upload.png`、`icon-256.png`、`icon-1024.png`、`icon-64.png`、`icon-32.png` 和 `icon.svg` 属于**早期图标资产**，不会自动因为 README 更换 Logo 而更新 ChatGPT 里已经部署的应用图标。
+`icon.svg` 已同步为新版 S 标志。原有的 `icon-upload.png`、`icon-256.png`、`icon-1024.png`、`icon-64.png` 和 `icon-32.png` 仍是**早期 PNG 兼容素材**；它们不会自动因为 README 更换 Logo 而更新 ChatGPT 里已经部署的应用图标。
 
 为避免破坏现有应用安装和历史引用，这批文件在统一导出并核对上传要求之前保留。**它们不应再被新宣传页面当作官方主 Logo。** 完成一次统一导出后，可以将各尺寸 PNG 更新为同一 S 母版，并在 ChatGPT 的应用配置中单独更新上传图标。
 
