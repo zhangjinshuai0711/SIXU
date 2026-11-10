@@ -111,9 +111,9 @@ npm start
 
 <div align="center">
 
-<img src="branding/sixu-workflow-animated.svg" alt="思序的六阶段动态流程示意：输入、候选、比较、检查、修订和完成" width="850" />
+<img src="branding/sixu-workflow.gif" alt="SIXU 六阶段动态示意：INPUT、EXPAND、CHALLENGE、VERIFY、REVISE、FINALIZE" width="720" />
 
-<sub>动态流程示意，非真实运行录屏；只有已声明的结构化条件才会接受程序检查。</sub>
+<sub>GIF 动态流程示意，非真实运行录屏；只有已声明且受支持的结构化条件才会接受程序检查。</sub>
 
 </div>
 
