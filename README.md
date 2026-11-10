@@ -46,7 +46,7 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 
 <div align="center">
 
-<img src="branding/sixu-instant-flow.svg" alt="ChatGPT Instant 与 Sixu 的动态推理工作流：INPUT、EXPAND、BRANCH、CHALLENGE、VERIFY、REVISE、FINALIZE，并展示条件性的修订回路" width="100%" />
+<img src="branding/sixu-instant-flow.gif" alt="ChatGPT Instant 与 Sixu 的动态推理工作流：INPUT、EXPAND、BRANCH、CHALLENGE、VERIFY、REVISE、FINALIZE，并展示条件性的修订回路" width="100%" />
 
 <sub>动态架构示意 · 按需探索和修订，阶段不一定逐项发生；只有已声明且受支持的条件才由程序检查。</sub>
 
