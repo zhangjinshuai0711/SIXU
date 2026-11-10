@@ -12,7 +12,7 @@
 | 备用 SVG 源文件 | [sixu-instant-flow.svg](sixu-instant-flow.svg) | 矢量设计源，**不再嵌入 README** |
 | 社交分享封面候选 | [sixu-social-preview.svg](sixu-social-preview.svg) | 待导出 PNG 并在仓库 Settings 中设置 |
 | 错误→修订→校验案例 | [sixu-revision-story.svg](sixu-revision-story.svg) | 教学示意，非真实运行录屏 |
-| 真实对照高清图 | [../docs/images/instant-vs-sixu-demo-hd.svg](../docs/images/instant-vs-sixu-demo-hd.svg) | 依据用户公开对话截图重绘的静态矢量图，首页使用 |
+| 真实对照高清图 | [../docs/images/instant-vs-sixu-demo-hd.png](../docs/images/instant-vs-sixu-demo-hd.png) | 高清 PNG（1536×1024），基于真实公开对话截图制作的展示图，首页使用 |
 | 原阶段 GIF | [sixu-workflow.gif](sixu-workflow.gif) | 旧版概念动画，留作兼容，不作为首页主演示 |
 | SVG 阶段动画 | [sixu-workflow-animated.svg](sixu-workflow-animated.svg) | 备用概念动画 |
 
@@ -32,7 +32,7 @@
 
 - 使用准确的产品事实：MCP 工作流、版本化候选、有限的已声明结构化检查、状态管理；不把 `deep` 宣称为模型原生 High。
 - 不能把 `completed` 当成全部结果“已证实”。
-- 解释示意图加“教学示意”标识；真实对照使用公开对话核对，矢量重绘不可冒充原始截图或程序验证记录。
+- 解释示意图加“教学示意”标识；真实对照使用公开对话核对，图片设计稿不可冒充原始截图或程序验证记录。
 - 动画、Banner、社交图使用同一主标志；避免重新设计与主 Logo 不同的 S。首页只展示 `sixu-instant-flow.gif`，旧图表与 SVG 源文件仅作为历史/设计资产保留。
 - 不使用“官方认证”“100% 正确率”“无限额度”等未经证实的营销词。
 - 代码已公开，但仓库当前未指定许可证；不要直接称为具有某种开源许可。

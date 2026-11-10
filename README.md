@@ -62,9 +62,9 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 
 <div align="center">
 
-<img src="docs/images/instant-vs-sixu-demo-hd.svg" alt="根据两张真实对话截图裁剪排版：普通 Instant 在同一回答中纠正了 B、D、E 的互斥错误并给出 A、D、E；Instant 加 Sixu Deep 也给出 A、D、E，服务状态为 completed、model_review_only，程序检查次数为零" width="100%" />
+<img src="docs/images/instant-vs-sixu-demo-hd.png" alt="基于公开对话设计的高清对照图：普通 Instant 自行纠正互斥错误，Instant 加 Sixu Deep 通过模型审查；最终均选择 A、D、E，成本 10，价值 25；Sixu 服务端程序检查为 0" width="100%" />
 
-<sub>根据真实对话截图进行高清矢量重绘，便于放大查看；关键结果以公开对话为准，非严格控制实验。</sub>
+<sub>根据两段公开对话的截图内容整理的高清 PNG 展示图（1536×1024），非原始截图拼贴；原始事实请以公开对话为准。本例不是受控准确率实验。</sub>
 
 </div>
 

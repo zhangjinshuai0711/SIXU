@@ -63,9 +63,9 @@ According to [OpenAI's official usage-limits announcement](https://help.openai.c
 
 <div align="center">
 
-<img src="docs/images/instant-vs-sixu-demo-hd.svg" alt="Real screenshot excerpts from Instant and Instant plus Sixu Deep. Both end with projects A, D, E, cost 10 and value 25. Sixu reports model_review_only with no executed internal checks." width="100%" />
+<img src="docs/images/instant-vs-sixu-demo-hd.png" alt="High-resolution visual comparison based on two public chats: Instant and Instant plus Sixu Deep both select A, D, E, cost 10, value 25; Sixu reports model_review_only and zero executed internal checks." width="100%" />
 
-<sub>High-resolution vector recreation based on genuine chat screenshots. Read the linked conversations for the original evidence; this is not a controlled benchmark.</sub>
+<sub>High-resolution PNG illustration (1536×1024) composed from details shown in the real chat screenshots—not a literal screenshot montage. Consult the linked conversations for the original evidence; this is not a controlled benchmark.</sub>
 
 </div>
 
