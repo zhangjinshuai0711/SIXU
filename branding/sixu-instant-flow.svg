@@ -58,7 +58,7 @@
   <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
   <g transform="translate(76 59)" stroke="#c490fd" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle r="24"/><circle r="12"/><path d="M0 0L31 -28M22 -29l9 1 1 9"/></g>
   <text x="76" y="135" class="step-label">CHALLENGE</text>
-  <text x="76" y="156" class="step-caption">Review & compare</text>
+  <text x="76" y="156" class="step-caption">Review &amp; compare</text>
   <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#c490fd" style="animation-delay:4.949999999999999s"/>
   <circle class="step-dot" cx="76" cy="-11" r="5" fill="#c490fd" style="animation-delay:4.949999999999999s" />
  </g><g transform="translate(752 205)">
