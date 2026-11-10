@@ -70,7 +70,15 @@ flowchart TD
 
 **模型负责思考与生成，Sixu 负责强制执行有状态的工作流。** 深度模式会要求不同候选进行比较，检查失败可以进入修订；实际路线由 `next_action` 决定，流程不是固定六步。“已完成”仅表示协议完成，程序只检查实际声明且受支持的条件。
 
-[查看完整版架构图](docs/images/adaptive-reasoning-architecture.png) · [查看结构化校验与版本规则](docs/V0.4.md)
+<div align="center">
+
+<img src="docs/images/adaptive-reasoning-architecture.png" alt="思序自适应推理架构图（静态图片备用，默认直接显示）" width="850" />
+
+<sub>静态架构图（如客户端不支持 Mermaid，可查看此图）</sub>
+
+</div>
+
+[单独打开完整架构图](docs/images/adaptive-reasoning-architecture.png) · [查看结构化校验与版本规则](docs/V0.4.md)
 
 ## 一个具体例子
 
@@ -159,8 +167,6 @@ npm start
 <summary><b>技术细节：工作流与本地管理</b></summary>
 
 思序依据当前 `next_action` 推进，可能进入 `EXPAND`、`BRANCH`、`CHALLENGE`、`VERIFY`、`REVISE` 和 `FINALIZE`。动作不是固定顺序，也不代表多个独立模型采样。
-
-<img src="docs/images/adaptive-reasoning-architecture.png" alt="Sixu adaptive reasoning architecture" width="850" />
 
 ```bash
 npm run status
