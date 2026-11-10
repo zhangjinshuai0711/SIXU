@@ -44,41 +44,17 @@ OpenAI [官方说明](https://help.openai.com/en/articles/20001625-understanding
 
 ## 思序如何为 Instant 组织推理
 
-下图是 **GitHub 原生 Mermaid 流程图，默认展开显示**，不依赖外部图片加载：
-
-```mermaid
-flowchart TD
-    A["用户在 ChatGPT Instant 提出问题"] --> B["当前 Instant 模型产生候选"]
-    B --> C["Sixu MCP 保存 run_id / 阶段 / 版本"]
-    C --> D["EXPAND：建立候选"]
-    D --> E{"是否需要比较多个候选？"}
-    E -->|"需要"| F["BRANCH：生成其他候选"]
-    E -->|"不需要"| G["CHALLENGE / VERIFY：目标审查与有限程序检查"]
-    F --> G
-    G --> H{"需要修订？"}
-    H -->|"是"| I["REVISE：提交新版本；旧审查失效"]
-    I --> G
-    H -->|"满足完成条件"| J["FINALIZE：选定版本与未解决事项"]
-    J --> K["Instant 输出答案及真实 run_id"]
-    classDef instant fill:#14345c,stroke:#55c6eb,color:#ffffff
-    classDef sixu fill:#30245e,stroke:#ad90ff,color:#ffffff
-    classDef gate fill:#17483f,stroke:#69debd,color:#ffffff
-    class A,B,K instant
-    class C,D,F,G,I,J sixu
-    class E,H gate
-```
-
-**模型负责思考与生成，Sixu 负责强制执行有状态的工作流。** 深度模式会要求不同候选进行比较，检查失败可以进入修订；实际路线由 `next_action` 决定，流程不是固定六步。“已完成”仅表示协议完成，程序只检查实际声明且受支持的条件。
-
 <div align="center">
 
-<img src="docs/images/adaptive-reasoning-architecture.png" alt="思序自适应推理架构图（静态图片备用，默认直接显示）" width="850" />
+<img src="branding/sixu-instant-flow.svg" alt="ChatGPT Instant 与 Sixu 的动态推理工作流：INPUT、EXPAND、BRANCH、CHALLENGE、VERIFY、REVISE、FINALIZE，并展示条件性的修订回路" width="100%" />
 
-<sub>静态架构图（如客户端不支持 Mermaid，可查看此图）</sub>
+<sub>动态架构示意 · 按需探索和修订，阶段不一定逐项发生；只有已声明且受支持的条件才由程序检查。</sub>
 
 </div>
 
-[单独打开完整架构图](docs/images/adaptive-reasoning-architecture.png) · [查看结构化校验与版本规则](docs/V0.4.md)
+**当前聊天模型负责生成候选，Sixu MCP 负责持久化状态、约束流程、版本管理和有限程序校验。** 深度模式要求候选比较；当需要修订时，旧审查不能用于新候选版本。实际动作由服务端返回的 `next_action` 决定，完成流程不代表任意结论得到独立证明。
+
+[查看 v0.4.0 协议与校验](docs/V0.4.md) · [完整使用指南](docs/USAGE.md)
 
 ## 一个具体例子
 
