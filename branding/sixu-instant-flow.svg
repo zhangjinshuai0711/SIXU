@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520" role="img" aria-labelledby="title desc">
+<title id="title">ChatGPT Instant × SIXU — animated reasoning workflow</title>
+<desc id="desc">A branded seven-stage conceptual flow with candidates, comparisons, declared checks, revisions and finalization. Stages pulse in order, and a curved arrow shows optional return from REVISE to VERIFY.</desc>
+<defs>
+<linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#070d24"/><stop offset=".58" stop-color="#152044"/><stop offset="1" stop-color="#0b112c"/></linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#48e5fa"/><stop offset=".55" stop-color="#947bff"/><stop offset="1" stop-color="#f187e2"/></linearGradient>
+<pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#4769a0" stroke-opacity=".18" stroke-width=".75"/></pattern>
+<radialGradient id="aura"><stop stop-color="#7861f0" stop-opacity=".27"/><stop offset="1" stop-color="#7960f0" stop-opacity="0"/></radialGradient>
+<style>
+.step-label{fill:#f2f8ff;font-family:Arial,sans-serif;font-size:19px;font-weight:800;text-anchor:middle}
+.step-caption{fill:#9fbbde;font-family:Arial,sans-serif;font-size:14px;text-anchor:middle}
+.card{fill:#142345;stroke-width:1.7}
+.animated-border{fill:none;stroke-width:4;opacity:0;animation:highlight 11.55s infinite;}
+.step-dot{opacity:0;animation:dot 11.55s infinite}
+.animated-progress{stroke-dasharray:9 11;animation:dash 3s linear infinite}
+.loop-line{stroke-dasharray:8 10;animation:dash 2s linear infinite}
+@keyframes highlight{0%,13%{opacity:1;filter:drop-shadow(0 0 11px currentColor)}14%,100%{opacity:0}}
+@keyframes dot{0%,13%{opacity:1;r:6}14%,100%{opacity:0;r:5}}
+@keyframes dash{to{stroke-dashoffset:-42}}
+@media (prefers-reduced-motion:reduce){.animated-border,.step-dot,.animated-progress,.loop-line{animation:none}.animated-border{opacity:.18}}
+</style>
+</defs>
+<rect width="1280" height="520" rx="24" fill="url(#background)"/><rect width="1280" height="520" fill="url(#grid)"/>
+<ellipse cx="1080" cy="260" rx="340" ry="240" fill="url(#aura)"/>
+<rect x="24" y="19" width="1232" height="129" rx="22" fill="#142449" fill-opacity=".72" stroke="#456aab" stroke-opacity=".55"/>
+<svg x="32" y="19" width="108" height="108" viewBox="0 0 320 320" aria-label="SIXU official logo"><defs><linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42f4fc"/><stop offset=".42" stop-color="#1d7ff5"/><stop offset=".7" stop-color="#7357fb"/><stop offset="1" stop-color="#fd48d4"/></linearGradient><linearGradient id="wire" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42eff5"/><stop offset="1" stop-color="#f2a6ff"/></linearGradient><filter id="aura" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter></defs><g fill="none" stroke-linecap="round"><path d="M245 72 C195 30 97 36 64 93 C18 173 165 162 220 190 C290 224 233 281 77 259" stroke="#5668ff" stroke-opacity=".42" stroke-width="58" filter="url(#aura)"/><path d="M245 72 C195 30 97 36 64 93 C18 173 165 162 220 190 C290 224 233 281 77 259" stroke="url(#ribbon)" stroke-width="53"/><path d="M240 62 C184 24 97 38 65 85" stroke="#bdf8ff" stroke-opacity=".62" stroke-width="6"/><path d="M233 253 C195 279 125 281 80 264" stroke="#e8a5ff" stroke-opacity=".72" stroke-width="5"/><path d="M215 105 H180 Q155 105 151 132 L146 169 Q145 186 130 195 L110 207 H73" stroke="#152b84" stroke-opacity=".9" stroke-width="22"/><path d="M215 105 H180 Q155 105 151 132 L146 169 Q145 186 130 195 L110 207 H73" stroke="url(#wire)" stroke-width="13"/><path d="M213 144 H180 Q165 144 160 157" stroke="url(#wire)" stroke-width="12"/><path d="M135 203 Q120 235 104 236 H78" stroke="url(#wire)" stroke-width="11"/></g><g stroke="#a7d7ff" stroke-opacity=".85" stroke-width="2"><circle cx="220" cy="105" r="16" fill="#49eafa"/><circle cx="215" cy="144" r="13" fill="#a4a1ff"/><circle cx="73" cy="207" r="14" fill="#cf9aff"/><circle cx="76" cy="236" r="14" fill="#f4a2fb"/><circle cx="146" cy="171" r="17" fill="#bbfcfc"/></g></svg>
+<text x="151" y="85" font-family="Arial,sans-serif" font-size="45" font-weight="800" fill="#f7faff">ChatGPT Instant × <tspan fill="#8d85fc">SIXU</tspan></text>
+<text x="153" y="119" font-family="Arial,sans-serif" font-size="17" fill="#b5c9ed" letter-spacing="1.6">STRUCTURED REASONING · ONE MODEL · TRACEABLE STATE</text>
+<rect x="1093" y="53" width="134" height="40" rx="15" fill="#29326a" stroke="#6e76c4"/><text x="1160" y="79" font-family="Arial,sans-serif" text-anchor="middle" font-weight="700" font-size="16" fill="#dce1ff">MCP · v0.4</text>
+<text x="38" y="186" font-family="Arial,sans-serif" font-size="19" fill="#9aafe0" letter-spacing="1.4">A TRACEABLE REASONING LOOP — WATCH THE HIGHLIGHT MOVE</text>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M211 288 H226" stroke="#6f9cdf" stroke-width="3.1"/><path d="M221 281l7 7-7 7" stroke="#8abefa" stroke-width="2.2" fill="none"/><path d="M385 288 H400" stroke="#6f9cdf" stroke-width="3.1"/><path d="M395 281l7 7-7 7" stroke="#8abefa" stroke-width="2.2" fill="none"/><path d="M559 288 H574" stroke="#6f9cdf" stroke-width="3.1"/><path d="M569 281l7 7-7 7" stroke="#8abefa" stroke-width="2.2" fill="none"/><path d="M733 288 H748" stroke="#6f9cdf" stroke-width="3.1"/><path d="M743 281l7 7-7 7" stroke="#8abefa" stroke-width="2.2" fill="none"/><path d="M907 288 H922" stroke="#6f9cdf" stroke-width="3.1"/><path d="M917 281l7 7-7 7" stroke="#8abefa" stroke-width="2.2" fill="none"/><path d="M1081 288 H1096" stroke="#6f9cdf" stroke-width="3.1"/><path d="M1091 281l7 7-7 7" stroke="#8abefa" stroke-width="2.2" fill="none"/><path class="animated-progress" d="M39 287 H1236" stroke="#80b9ff" stroke-width="2.5" stroke-opacity=".43"/></g>
+<g transform="translate(56 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#5ce4fb"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#5ce4fb" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M-15 -22h25l10 10v36h-35zM10 -22v10h10M-8 -3h19M-8 8h19" /></g>
+  <text x="76" y="135" class="step-label">INPUT</text>
+  <text x="76" y="156" class="step-caption">User request</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#5ce4fb" style="animation-delay:0s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#5ce4fb" style="animation-delay:0s" />
+ </g><g transform="translate(230 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#5ca9fa"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#5ca9fa" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M-26 -12L0 0l26 -12M-26 1L0 13 26 1M-26 14L0 26 26 14" /></g>
+  <text x="76" y="135" class="step-label">EXPAND</text>
+  <text x="76" y="156" class="step-caption">Create candidate</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#5ca9fa" style="animation-delay:1.65s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#5ca9fa" style="animation-delay:1.65s" />
+ </g><g transform="translate(404 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#a39afd"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#a39afd" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M0 0L-22 -20M0 0L22 -20M0 0v28"/><circle cx="-22" cy="-20" r="6"/><circle cx="22" cy="-20" r="6"/><circle cx="0" cy="28" r="6"/></g>
+  <text x="76" y="135" class="step-label">BRANCH</text>
+  <text x="76" y="156" class="step-caption">If needed</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#a39afd" style="animation-delay:3.3s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#a39afd" style="animation-delay:3.3s" />
+ </g><g transform="translate(578 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#c490fd"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#c490fd" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><circle r="24"/><circle r="12"/><path d="M0 0L31 -28M22 -29l9 1 1 9"/></g>
+  <text x="76" y="135" class="step-label">CHALLENGE</text>
+  <text x="76" y="156" class="step-caption">Review & compare</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#c490fd" style="animation-delay:4.949999999999999s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#c490fd" style="animation-delay:4.949999999999999s" />
+ </g><g transform="translate(752 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#5cf4bb"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#5cf4bb" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M0 -27L24 -15 22 17 0 29 -22 17 -24 -15Z"/><path d="M-12 1l8 9 18 -20"/></g>
+  <text x="76" y="135" class="step-label">VERIFY</text>
+  <text x="76" y="156" class="step-caption">Supported checks</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#5cf4bb" style="animation-delay:6.6s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#5cf4bb" style="animation-delay:6.6s" />
+ </g><g transform="translate(926 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#f18bdf"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#f18bdf" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M-21 -10A25 25 0 0 1 21 -14M21 14A25 25 0 0 1 -21 10"/><path d="M21 -14l1 -13 10 9M-21 10l-1 13-10 -9"/></g>
+  <text x="76" y="135" class="step-label">REVISE</text>
+  <text x="76" y="156" class="step-caption">On failed review</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#f18bdf" style="animation-delay:8.25s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#f18bdf" style="animation-delay:8.25s" />
+ </g><g transform="translate(1100 205)">
+  <rect class="card" x="0" y="0" width="152" height="171" rx="18" stroke="#64dffa"/>
+  <rect x="13" y="13" width="126" height="99" rx="15" fill="#1e2c51" fill-opacity=".76"/>
+  <g transform="translate(76 59)" stroke="#64dffa" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M-25 0l16 16 34 -38"/></g>
+  <text x="76" y="135" class="step-label">FINALIZE</text>
+  <text x="76" y="156" class="step-caption">Tracked result</text>
+  <rect class="animated-border" x="0" y="0" width="152" height="171" rx="18" stroke="#64dffa" style="animation-delay:9.899999999999999s"/>
+  <circle class="step-dot" cx="76" cy="-11" r="5" fill="#64dffa" style="animation-delay:9.899999999999999s" />
+ </g>
+<path d="M1002 388V416H828V386" stroke="#c583fa" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" class="loop-line"/>
+<path d="M821 396l7-10 7 10" fill="none" stroke="#d4a9ff" stroke-width="3"/>
+<text x="915" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#c7a2e6">If a revision is needed</text>
+<rect x="24" y="458" width="1232" height="47" rx="14" fill="#101d3d" stroke="#3b5d91" stroke-opacity=".75"/>
+<text x="43" y="487" font-family="Arial,sans-serif" font-size="17" fill="#c8def5">Conceptual workflow · Only declared, supported conditions can be programmatically checked.</text>
+<text x="1235" y="487" text-anchor="end" font-family="Arial,sans-serif" font-size="16" fill="#8bf2c8">STATEFUL • BOUNDED</text>
+</svg>
