@@ -2,9 +2,13 @@
 
 <img src="branding/sixu-hero.svg" alt="SIXU · Stop guessing. Start reasoning." width="100%" />
 
-**Trace the reasoning. Track the revisions.**
+**⚡ ChatGPT Instant × SIXU — an external reasoning workflow for the shared-allowance era.**
 
-Give your current chat model a bounded, stateful workflow for exploring candidates, reviewing constraints and revising results.
+### **Starting December 2026: ChatGPT and Codex share usage allowances; Instant chat does not draw from that allowance.**
+
+**Give Instant a structured route beyond one-shot answers.** Explore candidates, review constraints and record revisions with Sixu—while reserving eligible higher-effort usage for tasks that truly need it.
+
+[**Instant + Sixu setup**](#use-sixu-with-chatgpt-instant) · [**Why December matters**](#why-instant--sixu-now) · [**See the flowchart**](#how-sixu-guides-instant)
 
 [![Version](https://img.shields.io/badge/version-v0.4.0-715DF2)](CHANGELOG.md)
 [![Protocol](https://img.shields.io/badge/MCP-workflow-2B4375)](docs/V0.4.md)
@@ -24,6 +28,51 @@ Your **existing chat model** proposes and reviews candidates. Sixu manages stage
 
 It is **not another model**, does not increase the model's internal thinking budget, and does not invoke a separate paid model API.
 
+## Why Instant + Sixu now?
+
+According to [OpenAI's official usage-limits announcement](https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits), **starting in December 2026, ChatGPT and Codex share a token-measured allowance for Plus, Pro and Business plans, while Instant chat does not draw from this shared allowance.**
+
+| Native higher-effort modes / Codex | **ChatGPT Instant + Sixu** |
+| --- | --- |
+| Use the applicable shared allowance | **Instant chat is excluded from that shared allowance** |
+| Can use a higher native thinking effort | **Remains the selected Instant model** |
+| Good for harder model-intensive tasks | Uses bounded external candidate exploration and limited checks for suitable tasks |
+| Depends on the selected model/feature | Requires custom MCP access; Sixu itself calls no extra paid model API |
+
+**Practical positioning:** try Instant + Sixu for checkable, constraint-heavy work, then use native higher-effort modes or Codex when required.
+
+> **Important:** “Instant chat does not draw from the shared allowance” is **not** a promise of unlimited Instant messages or unlimited MCP/tool calls. Client capabilities, account permissions, other restrictions and applicable usage rules still apply. Sixu cannot unlock the model's native High thinking budget, and general accuracy gains are not yet established. Check **Settings → Usage**. [Official source](https://help.openai.com/en/articles/20001625-understanding-chatgpt-and-codex-usage-limits) (reviewed November 10, 2026).
+
+## How Sixu guides Instant
+
+This **native GitHub Mermaid diagram** is visible by default:
+
+```mermaid
+flowchart TD
+    A["User asks in ChatGPT Instant"] --> B["Instant model proposes a candidate"]
+    B --> C["Sixu MCP stores run_id / stage / version"]
+    C --> D["EXPAND: candidate"]
+    D --> E{"Another candidate needed?"}
+    E -->|"Yes"| F["BRANCH: alternative candidate"]
+    E -->|"No"| G["CHALLENGE / VERIFY: review and bounded checks"]
+    F --> G
+    G --> H{"Revision needed?"}
+    H -->|"Yes"| I["REVISE: new version; stale review invalid"]
+    I --> G
+    H -->|"Completion gates met"| J["FINALIZE: selected version and unresolved issues"]
+    J --> K["Instant delivers answer and actual run_id"]
+    classDef instant fill:#14345c,stroke:#55c6eb,color:#ffffff
+    classDef sixu fill:#30245e,stroke:#ad90ff,color:#ffffff
+    classDef gate fill:#17483f,stroke:#69debd,color:#ffffff
+    class A,B,K instant
+    class C,D,F,G,I,J sixu
+    class E,H gate
+```
+
+**The chat model generates; Sixu tracks and constrains the workflow.** This is not a fixed six-step chain and does not prove arbitrary conclusions correct. Only submitted, supported structured conditions can be checked programmatically.
+
+[Full architecture image](docs/images/adaptive-reasoning-architecture.png) · [v0.4 technical details](docs/V0.4.md)
+
 ## A concrete example
 
 <img src="branding/sixu-revision-story.svg" alt="Illustrative arithmetic example: an incorrect 497 candidate is revised to 507 and checked" width="100%" />
@@ -31,6 +80,16 @@ It is **not another model**, does not increase the model's internal thinking bud
 Consider the task `18 × 24 + 75`. An initial candidate `497` is incorrect. If the client declares the corresponding structured arithmetic check, the service can reject the candidate and track a revised value of `507` with a new candidate version.
 
 **This is a conceptual illustration, not a recording or benchmark result.** Checks only cover supported conditions actually submitted to the service. [Real-demo recording checklist](docs/RECORD_DEMO.md).
+
+## Use Sixu with ChatGPT Instant
+
+In a ChatGPT client where custom MCP apps are available: **select Instant** → select your connected **Sixu** app → send a task with an explicit app mention → confirm the actual tool-returned `run_id`.
+
+```text
+@思序 深度：Use the current Instant model. Compare candidates, review the task constraints, revise if necessary, then report the actual run_id and verification status.
+```
+
+"Deep" is Sixu's **external workflow depth**, not ChatGPT's native High thinking mode. If the app is unavailable in Instant on your account, do not infer that the service executed.
 
 ## Quick start
 
