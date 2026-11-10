@@ -45,41 +45,17 @@ According to [OpenAI's official usage-limits announcement](https://help.openai.c
 
 ## How Sixu guides Instant
 
-This **native GitHub Mermaid diagram** is visible by default:
-
-```mermaid
-flowchart TD
-    A["User asks in ChatGPT Instant"] --> B["Instant model proposes a candidate"]
-    B --> C["Sixu MCP stores run_id / stage / version"]
-    C --> D["EXPAND: candidate"]
-    D --> E{"Another candidate needed?"}
-    E -->|"Yes"| F["BRANCH: alternative candidate"]
-    E -->|"No"| G["CHALLENGE / VERIFY: review and bounded checks"]
-    F --> G
-    G --> H{"Revision needed?"}
-    H -->|"Yes"| I["REVISE: new version; stale review invalid"]
-    I --> G
-    H -->|"Completion gates met"| J["FINALIZE: selected version and unresolved issues"]
-    J --> K["Instant delivers answer and actual run_id"]
-    classDef instant fill:#14345c,stroke:#55c6eb,color:#ffffff
-    classDef sixu fill:#30245e,stroke:#ad90ff,color:#ffffff
-    classDef gate fill:#17483f,stroke:#69debd,color:#ffffff
-    class A,B,K instant
-    class C,D,F,G,I,J sixu
-    class E,H gate
-```
-
-**The chat model generates; Sixu tracks and constrains the workflow.** This is not a fixed six-step chain and does not prove arbitrary conclusions correct. Only submitted, supported structured conditions can be checked programmatically.
-
 <div align="center">
 
-<img src="docs/images/adaptive-reasoning-architecture.png" alt="Sixu adaptive reasoning architecture, visible static fallback" width="850" />
+<img src="branding/sixu-instant-flow.svg" alt="Animated ChatGPT Instant and Sixu workflow: INPUT, EXPAND, BRANCH, CHALLENGE, VERIFY, REVISE, FINALIZE, including an optional revision loop" width="100%" />
 
-<sub>Static diagram fallback if Mermaid does not render in your client.</sub>
+<sub>Animated conceptual diagram · Actual stages depend on the task and server next_action; only declared, supported conditions can be programmatically checked.</sub>
 
 </div>
 
-[Open full-size architecture image](docs/images/adaptive-reasoning-architecture.png) · [v0.4 technical details](docs/V0.4.md)
+**The current chat model generates candidates; Sixu MCP maintains state, protocol gates, candidate versions and bounded programmatic checks.** Deep workflow mode requires candidate comparison. Revisions invalidate stale reviews, and protocol completion is not proof of universal correctness.
+
+[v0.4.0 protocol and checks](docs/V0.4.md) · [Usage guide](docs/USAGE.md)
 
 ## A concrete example
 
