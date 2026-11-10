@@ -1,0 +1,138 @@
+name: Render English SIXU comparison PNG (one time)
+
+on:
+  push:
+    paths:
+      - '.github/workflows/render-sixu-english-png.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install rendering requirements
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-dejavu-core
+          python -m pip install --quiet pillow==11.3.0
+      - name: Render English image with Pillow (no SVG)
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+          from pathlib import Path
+          
+          W, H = 2400, 1500
+          img = Image.new("RGB", (W, H), "#F3F6FB")
+          d = ImageDraw.Draw(img)
+          F = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+          FB = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+          fonts = {}
+          def font(size, bold=False):
+              key = (size, bold)
+              if key not in fonts:
+                  fonts[key] = ImageFont.truetype(FB if bold else F, size)
+              return fonts[key]
+          def text(x,y,s,size=30,color="#1C2940",bold=False):
+              d.text((x,y),str(s),font=font(size,bold),fill=color)
+          def rr(box, fill, radius=26, outline=None, width=2):
+              d.rounded_rectangle(box,radius=radius,fill=fill,outline=outline,width=width)
+          def line(x1,y1,x2,y2,fill="#E6EBF4",width=2):
+              d.line((x1,y1,x2,y2),fill=fill,width=width)
+          
+          rr((79,51,410,107),"#2865DB",24)
+          text(104,63,"SIXU  /  DEMO",32,"#FFFFFF",True)
+          text(80,137,"ONE PROBLEM. TWO INSTANT WORKFLOWS.",65,"#192840",True)
+          text(80,224,"Budget <= 10    |    Choose C -> requires A    |    B and E cannot coexist",32,"#61718B")
+          LX, RX, Y, BW, BH = 80, 1220, 295, 1100, 1010
+          for x in (LX,RX):
+              rr((x+3,Y+8,x+BW+3,Y+BH+8),"#E8ECF3",28)
+              rr((x,Y,x+BW,Y+BH),"#FFFFFF",28,outline="#E0E7F1",width=2)
+          text(LX+45,335,"Instant only",50,"#182A43",True)
+          rr((LX+742,330,LX+1055,386),"#EAF1FF",26)
+          text(LX+762,342,"CASE ANALYSIS",28,"#2865DB",True)
+          text(RX+45,335,"Instant + SIXU Deep",48,"#182A43",True)
+          rr((RX+743,330,RX+1055,386),"#EAF1FF",26)
+          text(RX+765,342,"MODEL REVIEW",27,"#2865DB",True)
+          text(LX+45,421,"Candidate comparison",37,"#182A43",True)
+          text(RX+45,421,"Candidate comparison",37,"#182A43",True)
+          heads=[("ID",43),("Projects",200),("Cost",520),("Value",690),("Result",855)]
+          for x in (LX,RX):
+              for s,dx in heads:
+                  text(x+dx,485,s,29,"#6F7D94",True)
+              line(x+42,534,x+BW-40,534)
+          left=[("S1","B + D + E","9","24","INVALID"),("S2","A + B + D","9","23","FEASIBLE"),("S3","A + D + E","10","25","BEST"),("S4","B + D","5","14","FEASIBLE"),("S5","A + C","9","21","FEASIBLE")]
+          right=[("C1","A + D + E","10","25","BEST"),("C2","A + B + D","9","23","RUNNER-UP"),("C3","A + C","9","21","FEASIBLE")]
+          def table_rows(x, rows, best_idx):
+              for i,row in enumerate(rows):
+                  top=540+i*70
+                  y=top+12
+                  if i==best_idx:
+                      rr((x+34,top,x+BW-36,top+64),"#E4F6EC",14)
+                  for j,(val,(_,dx)) in enumerate(zip(row,heads)):
+                      color="#168156" if i==best_idx else ("#B54145" if i==0 and x==LX and j==4 else "#26354E")
+                      fs=29 if j==4 else 34
+                      text(x+dx,y,val,fs,color,i==best_idx)
+                  line(x+45,top+66,x+BW-40,top+66,"#EFF2F6",1)
+          table_rows(LX,left,2)
+          table_rows(RX,right,0)
+          line(LX+42,914,LX+BW-42,914)
+          text(LX+44,935,"OPTIMALITY CHECK  /  CASE ANALYSIS",32,"#192840",True)
+          text(LX+62,994,"1   Choose C: maximum value = 21",30,"#52647E")
+          text(LX+62,1044,"2   No C, choose E: maximum value = 25",30,"#52647E")
+          text(LX+62,1094,"3   No C and no E: maximum value = 23",30,"#52647E")
+          rr((LX+43,1156,LX+1054,1241),"#EAF1FF",18)
+          text(LX+74,1175,"max(21, 25, 23) = 25",48,"#2865DB",True)
+          line(RX+44,767,RX+BW-44,767)
+          text(RX+44,790,"OPTIMALITY CLAIM IN THE RESPONSE",31,"#192840",True)
+          text(RX+57,850,"32 subsets considered (2^5)",31,"#52647E")
+          text(RX+57,900,"13 feasible / 19 infeasible",31,"#52647E")
+          text(RX+57,950,"Unique winner: A + D + E, value 25",31,"#52647E")
+          line(RX+44,1007,RX+BW-44,1007)
+          text(RX+44,1026,"ACTUAL SIXU TOOL RECORD",32,"#192840",True)
+          text(RX+57,1084,"status: completed    depth: deep",29,"#52647E")
+          text(RX+57,1126,"stored candidates: 2    steps: 3",29,"#52647E")
+          rr((RX+42,1171,RX+BW-41,1275),"#FFF1DE",18)
+          text(RX+68,1181,"model_review_only",35,"#65431C",True)
+          text(RX+68,1227,"Server-side checks: 0  (no programmatic enumeration)",25,"#985610")
+          rr((80,1338,2320,1468),"#172743",25)
+          text(117,1359,"SAME CORRECT ANSWER: A + D + E",47,"#FFFFFF",True)
+          text(1540,1368,"COST 10   |   VALUE 25",38,"#BBD6FF",True)
+          text(118,1423,"Different verification narratives. This single example does NOT establish an accuracy advantage.",24,"#CED9EC")
+          path=Path("docs/images/instant-vs-sixu-demo-en.png")
+          img.save(path,optimize=True)
+          assert path.read_bytes().startswith(bytes([137,80,78,71,13,10,26,10]))
+          assert img.size==(2400,1500)
+          print("Rendered",path,path.stat().st_size,"bytes")
+          
+          PY
+      - name: Update README and clean up previous graphic
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("README.md")
+          s=p.read_text()
+          old="docs/images/instant-vs-sixu-corrected.png"
+          new="docs/images/instant-vs-sixu-demo-en.png"
+          assert old in s, "README image path unexpectedly changed"
+          s=s.replace(old,new)
+          s=s.replace('alt="真实对照：Instant 用三种情况分类讨论；SIXU 回答给出 32 种组合穷举论证，但实际程序检查为 0 次；最终均选择 A、D、E"', 'alt="Instant vs SIXU Deep: candidate comparisons, case analysis versus reported enumeration, model_review_only with zero server-side checks; both find A + D + E"')
+          s=s.replace("修订后的高清矢量插图，依据截图与用户补充原文重新排版；不是原始聊天截图。区分模型文字中的穷举论证与服务端实际检查。", "英文高清 PNG 对照图（依据截图和补充原文重新排版，并非原始聊天截图）；清楚区分模型声称的穷举论证与 SIXU 服务端实际检查。")
+          p.write_text(s)
+          assert new in p.read_text() and old not in p.read_text()
+          print("README image path and caption updated")
+          
+          PY
+          git rm docs/images/instant-vs-sixu-corrected.png .github/workflows/render-sixu-english-png.yml
+          git add docs/images/instant-vs-sixu-demo-en.png README.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'docs: replace demo figure with verified English PNG'
+          git push origin HEAD:main
