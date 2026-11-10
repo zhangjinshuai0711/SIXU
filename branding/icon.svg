@@ -1,12 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
-  <title id="title">思序</title>
-  <desc id="desc">一条连接三个节点的折返路径，在最终节点形成勾选标记。</desc>
-  <rect width="512" height="512" rx="112" fill="#E8F1F1"/>
-  <path d="M144 132H304C344 132 368 160 368 196S344 260 304 260H208C168 260 144 288 144 324S168 388 208 388H352"
-        fill="none" stroke="#137C79" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="144" cy="132" r="42" fill="#137C79"/>
-  <circle cx="256" cy="260" r="34" fill="#EC8C72"/>
-  <circle cx="352" cy="388" r="56" fill="#173B42"/>
-  <path d="M329 389L345 405L376 373"
-        fill="none" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 320 320" role="img" aria-label="SIXU 思序 logo, a neon S with reasoning branches"><defs><linearGradient id="ribbon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42f4fc"/><stop offset=".42" stop-color="#1d7ff5"/><stop offset=".7" stop-color="#7357fb"/><stop offset="1" stop-color="#fd48d4"/></linearGradient><linearGradient id="wire" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42eff5"/><stop offset="1" stop-color="#f2a6ff"/></linearGradient><filter id="aura" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter></defs><g fill="none" stroke-linecap="round"><path d="M245 72 C195 30 97 36 64 93 C18 173 165 162 220 190 C290 224 233 281 77 259" stroke="#5668ff" stroke-opacity=".42" stroke-width="58" filter="url(#aura)"/><path d="M245 72 C195 30 97 36 64 93 C18 173 165 162 220 190 C290 224 233 281 77 259" stroke="url(#ribbon)" stroke-width="53"/><path d="M240 62 C184 24 97 38 65 85" stroke="#bdf8ff" stroke-opacity=".62" stroke-width="6"/><path d="M233 253 C195 279 125 281 80 264" stroke="#e8a5ff" stroke-opacity=".72" stroke-width="5"/><path d="M215 105 H180 Q155 105 151 132 L146 169 Q145 186 130 195 L110 207 H73" stroke="#152b84" stroke-opacity=".9" stroke-width="22"/><path d="M215 105 H180 Q155 105 151 132 L146 169 Q145 186 130 195 L110 207 H73" stroke="url(#wire)" stroke-width="13"/><path d="M213 144 H180 Q165 144 160 157" stroke="url(#wire)" stroke-width="12"/><path d="M135 203 Q120 235 104 236 H78" stroke="url(#wire)" stroke-width="11"/></g><g stroke="#a7d7ff" stroke-opacity=".85" stroke-width="2"><circle cx="220" cy="105" r="16" fill="#49eafa"/><circle cx="215" cy="144" r="13" fill="#a4a1ff"/><circle cx="73" cy="207" r="14" fill="#cf9aff"/><circle cx="76" cy="236" r="14" fill="#f4a2fb"/><circle cx="146" cy="171" r="17" fill="#bbfcfc"/></g></svg>
